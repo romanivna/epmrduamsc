@@ -1,0 +1,39 @@
+@import '../../shared/styles/colors';
+@import '../../shared/styles/variables';
+@import '../../shared/styles/content/content';
+
+.tab {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 60px;
+
+  &-item {
+    display: inline-block;
+    border-bottom: 3px solid $color-white;
+    padding: 10px;
+    width: 20%;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    &:hover {
+      background: $color-lightgray;
+    }
+
+    &--active {
+      border-bottom: 3px solid $color-darkgray;
+      font-size: 1.2rem;
+    }
+
+    &:focus {
+      outline: none;
+    }
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+

@@ -1,0 +1,344 @@
+@import '../../../../shared/styles/colors';
+@import '../../../../shared/styles/variables';
+@import '../../../../shared/styles/z-index';
+
+.applications {
+
+  &__header {
+    margin: 32px 0 50px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &__tools {
+    display: flex;
+    justify-content: flex-end;
+
+    &-button {
+      transition: box-shadow .3s ease;
+      margin: 10px;
+      border: 1px solid $color-gray;
+      background: none;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      color: $color-darkgray;
+      font-family: $text-font-family;
+
+      &:hover {
+        box-shadow: 0 2px 9px 1px $color-gray;
+        background: $color-lightgray-bg;
+        color: $color-red;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__filters {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    height: 30px;
+
+    @media screen and (max-width: 768px) {
+      flex-wrap: wrap;
+      margin: 0 10px 10px;
+      height: auto;
+    }
+
+    &-search {
+      display: block;
+      outline: none;
+      border: 0;
+      padding: 0 10px;
+      width: 100%;
+      line-height: 30px;
+      color: $color-darkgray;
+    }
+  }
+
+  &__input-container {
+    border: 1px solid $color-gray;
+    width: 25%;
+    height: 30px;
+    overflow: hidden;
+    cursor: default;
+
+    &:hover {
+      box-shadow: 0 2px 9px 1px $color-gray;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }
+
+  .more {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 30px;
+    overflow: visible;
+
+    @media screen and (max-width: 768px) {
+      width: 45%;
+    }
+
+    @media screen and (max-width: 375px) {
+      margin-bottom: 10px;
+      width: 50%;
+    }
+
+    &-name {
+      margin: 0 20px;
+
+      @media screen and (max-width: 768px) {
+        margin: 0 7px;
+      }
+
+      @media screen and (max-width: 375px) {
+        margin: 0 3px;
+      }
+    }
+
+    &-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: .6;
+      z-index: 10;
+      border-radius: 10rem;
+      background-color: $color-mediumgray;
+      padding: 3px;
+      height: 30px;
+      text-align: center;
+      color: $color-white;
+      font-size: 2.5rem;
+      cursor: pointer;
+
+      &:hover {
+        transition: all .25s ease;
+        opacity: 1;
+        background-color: $color-darkgray;
+      }
+    }
+
+    &-title {
+      text-transform: uppercase;
+      font-family: $text-font-family;
+    }
+
+    &-list {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      z-index: 100;
+      padding: 0 11px 0 10px;
+      width: 190px;
+
+      @media screen and (max-width: 768px) {
+        top: 30px;
+        left: 20%;
+      }
+
+      @media screen and (max-width: 425px) {
+        top: 30px;
+        left: -30px;
+      }
+
+      &__select {
+        border: 1px solid $color-gray;
+        border-radius: 20px 0 0 20px;
+        box-shadow: 0 0 3px;
+        background: $color-white;
+        padding: 10px;
+        max-height: 230px;
+        overflow-y: auto;
+
+        &-option {
+          transition: max-height 1s ease;
+          line-height: 1.5rem;
+
+          &:hover {
+            color: $color-065red;
+            cursor: pointer;
+          }
+        }
+      }
+
+      &__hide {
+        z-index: -1;
+      }
+    }
+
+  }
+
+  .arrow-rotate {
+    transform: rotate(-180deg);
+    transition: transform 150ms ease;
+  }
+
+  &-table {
+    margin-bottom: 20px;
+    width: 100%;
+    min-width: 716px;
+
+    &-wrapper {
+
+      overflow-x: auto;
+    }
+
+    &-header {
+
+      &__item {
+        position: relative;
+        border: 1px solid $color-mediumgray;
+        background-color: $color-lightgray-bg;
+        min-width: 4rem;
+        line-height: 2rem;
+        letter-spacing: 1px;
+        color: $color-black;
+        font-size: 14px;
+
+        &-icon {
+          position: absolute;
+          top: calc(1rem - 6px);
+          right: .5rem;
+          color: $color-darkgray;
+          cursor: pointer;
+
+          @media screen and (max-width: 375px) {
+            top: calc(1rem - 6px);
+            right: 5px;
+          }
+        }
+      }
+    }
+
+    &-row {
+      &__chunk {
+        border: 1px solid $color-mediumgray;
+        padding: 5px;
+        text-align: center;
+
+        .action-icon {
+          font-size: 1rem;
+          font-weight: bold;
+
+          &:hover {
+            color: $color-red;
+            cursor: pointer;
+
+          }
+        }
+      }
+
+      &:hover {
+        background-color: $color-lightgray-bg;
+      }
+
+      &__current {
+        background-color: $color-darkgray;
+        color: $color-white;
+
+        .action-icon {
+          display: none;
+        }
+
+        .edit-icon {
+          display: block;
+        }
+
+        &:hover {
+          background-color: lighten($color-darkgray, 20%);
+        }
+      }
+    }
+
+  }
+
+  &-trash {
+    position: relative;
+
+    &-wrapper {
+      float: right;
+      cursor: pointer;
+
+      &__icon {
+        margin: 10px;
+        font-size: 3rem;
+      }
+
+      &-counter {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 1px solid $color-darkgray;
+        border-radius: 2rem;
+        padding: 0 5px;
+      }
+
+      &:hover > &-counter,
+      &:hover > &__icon {
+        border-color: $color-red;
+        color: $color-red;
+      }
+    }
+  }
+
+  &-download {
+    float: right;
+  }
+}
+
+.trash {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+
+  &-show {
+    height: 100%;
+    overflow: visible;
+  }
+
+  &-buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  &-no {
+    text-align: center;
+  }
+}
+
+.modal-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  background-color: $color-black-transparent-bg-hard;
+  width: 100vw;
+  height: 100vh;
+
+  &__btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    color: $color-white;
+    font-size: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-red;
+    }
+  }
+}

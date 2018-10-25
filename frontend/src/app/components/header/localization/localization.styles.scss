@@ -1,0 +1,85 @@
+@import '../../../shared/styles/variables';
+@import '../../../shared/styles/colors';
+
+.header-misc {
+  
+  &__lang-switcher {
+    position: relative;
+
+    &:hover {
+      
+      .header-misc__lang-menu {
+        display: block;
+        }
+      }
+    }
+
+  &__current-lang {
+    display: block;
+    margin-right: 22px;
+
+    text-transform: uppercase;
+    font-family: 'open_sansregular', sans-serif;
+    font-size: .9rem;
+    font-weight: 300;
+    
+    cursor: pointer;
+  }
+
+  &__label {
+    display: block;
+    margin: 16px 0;
+  }
+
+  &__wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%) translateX(-30%);
+    z-index: 110;
+    padding-top: 12px;
+  }
+
+  &__lang-menu {
+    display: none;
+    position: relative;
+    box-shadow: 0 0 1px 1px $color-02black;
+    background-color: $color-white;
+    padding: 1px 18px;
+    color: $color-black;
+
+    ::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: rotate(45deg) translate(-50%, 0);
+      border-top: 1px solid $color-02black;
+      border-left: 1px solid $color-02black;
+      background: $color-white;
+      width: 10px;
+      height: 10px;
+      transform-origin: 50% 0%;      
+    }
+
+  }
+
+  &__lang-selector {
+
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'open_sansregular', sans-serif;
+    font-size: .9rem;
+    font-weight: 300;
+
+    &--active {
+      display: none;
+    }
+
+    &:hover {
+      color: $color-red;
+    }
+
+  }
+}

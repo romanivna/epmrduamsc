@@ -1,0 +1,30 @@
+<div *ngIf="extended" class="btn">
+  <a class="btn__add-department-item"
+     [routerLink]="['/', 'admin', 'departments', 'department-creation']"
+     title="{{'add department' | localizator}}">
+    <i class="fa fa-plus btn__icon" aria-hidden="true"></i>
+  </a>
+</div>
+<div class="content__music-departments" *ngIf = "isMusicDepartments">
+  <app-title *ngIf="musicDepartments.length > 0" [title]="'music departments'"></app-title>
+  <app-departments-item-preview
+    *ngFor="let departmentItem of musicDepartments"
+    [departmentItem]="departmentItem"
+    [extended]="extended"
+    (removedDepartmentItem)="suggestToRemove($event)">
+  </app-departments-item-preview>
+</div>
+<div class="content__compulsory-departments" *ngIf = "isCompulsoryDepartments">
+<app-title *ngIf="compulsoryDepartments.length > 0" [title]="'compulsory departments'"></app-title>
+  <app-departments-item-preview
+    *ngFor="let departmentItem of compulsoryDepartments"
+    [departmentItem]="departmentItem"
+    [extended]="extended"
+    (removedDepartmentItem)="suggestToRemove($event)">
+  </app-departments-item-preview>
+</div>
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutRemoving($event)">
+</app-confirmation-modal-window>
+
+<app-spinner></app-spinner>

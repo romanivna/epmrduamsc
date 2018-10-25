@@ -1,0 +1,50 @@
+<app-title [title]="'about school'" *ngIf="aboutUs?.about"></app-title>
+<div *ngIf="aboutUs?.about">
+  <div class="about-us__content" [innerHTML]="aboutUs.about | safeHtml">
+</div>
+
+
+<app-title [title]="'documents'"></app-title>
+<div *ngIf="!isDocuments; else noDocs">
+  <section class="doc">
+    <div
+      *ngFor="let doc of aboutUs.documents">
+      <div class="doc-container"  *ngIf="doc?.type === 'image'"
+      >
+        <img
+          class="doc-image"
+          [src]="doc.link"
+          (click)="activeImage=doc; showModal=true">
+      </div>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div *ngFor="let doc of aboutUs.documents">
+      <div class="doc-files-container"
+           *ngIf="doc?.type === 'pdf'" >
+        <img
+          src="../../../assets/img/pdf_preview.png" class="doc-files-container-pdf-preview" alt="pdf preview">
+        <p>
+          {{ doc.title }}</p>
+        <p class="doc-files-container-download" (click)="downloadFile(doc)">
+          {{'download' | localizator}}</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<ng-template #noDocs>
+  <p class="doc-no"> {{'Unfortunately, there is no documents yet.' | localizator}} </p>
+</ng-template>
+
+<app-modal-window *ngIf="showModal" (close)="showModal=false">
+  <div class="modal">
+    <img class="modal__image"
+         [src]="activeImage.link"
+         alt="activePhoto">
+    <p class="modal__title">{{activeImage.name}}</p>
+  </div>
+</app-modal-window>

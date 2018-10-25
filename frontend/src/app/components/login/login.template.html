@@ -1,0 +1,38 @@
+<app-title [title]="'logIn'"></app-title>
+<form class="login-form"
+      [formGroup]="loginForm"
+      (ngSubmit)="login(loginForm.value)"
+      method="post">
+  <div class="login-form__input-container form-group" tabindex="0">
+    <i class="fa fa-user" aria-hidden="true"></i>
+    <input class="login-form__input"
+           type="text"
+           placeholder="{{'Login' | localizator}} "
+           formControlName="login">
+  </div>
+  <div class="login-form__input-container form-group" tabindex="1">
+    <i class="fa fa-key" aria-hidden="true"></i>
+    <input class="login-form__input"
+           type="password"
+           placeholder="{{'Password' | localizator}}"
+           formControlName="password">
+  </div>
+  <div class="login-form__submit-container">
+    <button class="login-form__submit"
+            type="submit"
+            [disabled]="loginForm.invalid">
+      {{'logIn' | localizator}}
+    </button>
+  </div>
+</form>
+
+<div class="error-container"
+     *ngIf="loginError.value">
+  {{loginError.value | localizator}}
+</div>
+<div class="error-container"
+     *ngIf="passwordError.value">
+  {{passwordError.value | localizator}}
+</div>
+
+<app-error-message *ngIf="errMessage" [message]="errMessage | localizator" (onEnding)="errMessage = null"></app-error-message>

@@ -1,0 +1,37 @@
+@import '../../../shared/styles/colors';
+
+.image-slider {
+  position: relative;
+  padding: 30px 0 0;
+
+  &__selected-image-wrapper {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+
+    @media screen and (max-width: 468px) {
+      height: 300px;
+    }
+  }
+
+  &__selected-image {
+    background: center no-repeat;
+    background-size: contain;
+    width: 100%;
+    min-height: 400px;
+
+    @media screen and (max-width: 468px) {
+      min-height: 300px;
+    }
+  }
+
+  &__album-name {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background-color: $color-black-transparent-bg;
+    padding: 15px;
+    color: $color-red;
+    font-size: 1.5rem;
+  }
+}

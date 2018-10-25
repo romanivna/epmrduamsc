@@ -1,0 +1,5 @@
+<app-title [title]="'gallery' | localizator"></app-title>
+<app-image-slider *ngIf="spy.activeAlbum" [activeAlbumImgSources]="spy.activeAlbum"></app-image-slider>
+<app-albums #spy [extended]="false"></app-albums>
+
+<app-spinner></app-spinner>

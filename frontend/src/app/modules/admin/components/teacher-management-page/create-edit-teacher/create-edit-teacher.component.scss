@@ -1,0 +1,372 @@
+@import '../../../../../shared/styles/colors';
+@import '../../../../../shared/styles/variables';
+
+.teacher {
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10%;
+
+    @media screen and (max-width: 1200px) {
+      flex-direction: column;
+      align-items: center;
+    }
+    @media screen and (max-width: 480px) {
+      padding: 0;
+    }
+  }
+
+  &__img-box {
+    margin: 0 auto;
+  }
+
+  &__link {
+    display: flex;
+    margin: 0 0 1rem;
+
+    &-name {
+      display: block;
+      width: 10%;
+      min-width: 100px;
+    }
+
+    &-value {
+      width: 90%;
+    }
+  }
+
+  &__tools {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.25rem 0;
+  }
+
+  &__btn {
+    width: 40%;
+    max-width: 200px;
+    height: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 2rem;
+    color: $color-darkgray;
+    font-family: $text-font-family;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+
+    &--save {
+      background-color: $color-lightgray;
+
+      &:hover {
+        background-color: $color-gray;
+      }
+    }
+
+    &--cancel {
+      background-color: $color-065red;
+
+      &:hover {
+        background-color: $color-red;
+      }
+    }
+  }
+}
+
+.asterisk {
+  position: absolute;
+  top: 10px;
+  right: -10px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  &::after {
+    content: '*';
+    color: $color-red;
+  }
+}
+
+.img-wrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+
+  &__background-block {
+    position: absolute;
+    opacity: .8;
+    z-index: -1;
+    background-color: $color-lightgray;
+    width: 100%;
+    height: 300px;
+  }
+
+  &-icon {
+    position: relative;
+    z-index: 2;
+
+    &-text {
+      font-family: 'Oswald light', Arial, sans-serif;
+    }
+  }
+
+  &-input {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.img-box {
+  position: relative;
+  margin: 0 auto 1rem;
+  width: 300px;
+  height: 300px;
+
+  @media screen and (max-width: 480px) {
+    width: 200px;
+    height: 200px;
+  }
+
+  &__img {
+    position: relative;
+    z-index: -2;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__uploading {
+    display: flex;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    &-text {
+      align-self: center;
+      text-align: center;
+      line-height: 2rem;
+      color: $color-black;
+      font-size: 1.3rem;
+      font-weight: bold;
+
+      &-title {
+        position: relative;
+        z-index: 2000;
+        font-family: $text-font-family;
+        font-size: 20px;
+      }
+    }
+  }
+
+  &__btn {
+    display: none;
+  }
+
+  &__local-upload-wrapper {
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+  }
+}
+
+.data-wrapper {
+  width: 55%;
+
+  @media screen and (max-width: 1200px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+.content-box {
+  position: relative;
+
+  &__prop-container {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__prop-name {
+    padding: 1.5rem 0 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    &--custom {
+      position: absolute;
+      right: -10px;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+
+  &__select {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    transition: max-height .25s ease; 
+    z-index: 100; 
+    border: 1px solid transparent; 
+    padding: 5px 12px; 
+    width: 100%; 
+    max-height: 3rem; 
+    color: $color-darkgray;
+    font-size: 1.125rem; 
+
+    
+
+    &:hover {
+      position: absolute;
+      right: 0;
+      border: 1px solid $color-gray;
+      border-top: 0;
+      background: $color-lightgray; 
+      padding: 6px 13px 0;
+      width: 70%; 
+      max-height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+      box-sizing: border-box;
+
+      .content-box__select-option-arrow {
+        transform: rotate(-180deg);
+        transition: transform 150ms ease;
+      }
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+    
+    }
+
+    &-input-container {
+      margin: 15px 0;
+      border: 1px solid $color-gray;
+      width: 70%;
+      height: 3em;
+      overflow: hidden;
+      cursor: default;
+
+      &:hover {
+        box-shadow: 0 2px 9px 1px $color-gray;
+      }
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+
+    }
+
+    &-option {
+      margin: 5px;
+      padding: 3px;
+
+      &--disabled {
+        color: $color-gray;
+
+        &--loading {
+          display: block;
+          margin: .63rem;
+         }
+
+      }
+
+      &-arrow {
+        float: right;
+        transform: rotate(-360deg);
+        transition: transform 150ms ease;
+      }
+    
+    }
+    
+  }
+
+  &__header {
+    display: block;
+    outline: none;
+    border: 0;
+    padding: 0;
+    width: 100%;
+    line-height: 3rem;
+    color: $color-darkgray;
+    font-size: 1.3rem;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+  }
+
+  &__paragraph {
+    width: 95%;
+    resize: none;
+  }
+
+  &__btn-wrapper {
+    position: relative;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  &__btn {
+    position: relative;
+  }
+
+  &__tool-wrapper {
+    position: relative;
+    margin: 1rem 0;
+    width: 100%;
+    height: 1.5rem;
+  }
+
+  &__tool {
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 2rem;
+    text-align: center;
+    line-height: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__alert {
+    width: 100%;
+    color: $color-red;
+    font-weight: bold;
+  }
+
+}
+
+.disabled {
+  background-color: $color-lightgray;
+  cursor: auto;
+
+  &:hover {
+    background-color: $color-lightgray;
+  }
+}

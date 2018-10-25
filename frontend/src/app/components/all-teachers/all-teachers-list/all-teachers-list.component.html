@@ -1,0 +1,14 @@
+
+  <ng-container *ngFor="let teacher of teachers">
+    <app-teachers-preview-item
+      [teacher]="teacher">
+    </app-teachers-preview-item>
+  </ng-container>
+
+<app-show-next-button
+  class="show-next-button-teachers"
+  [hideButton]="allTeachersLoaded"
+  (showNext)="onNextTeachersItemsClick()">
+</app-show-next-button>
+
+  <app-spinner></app-spinner>

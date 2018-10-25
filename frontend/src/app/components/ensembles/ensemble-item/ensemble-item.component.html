@@ -1,0 +1,53 @@
+<!--<div class="ensemble" *ngIf="ensembleData">-->
+  <!--<app-title [title]="routeName.split('-').join(' ')"></app-title>-->
+  <!--<div class="ensemble__data"-->
+       <!--*ngFor="let item of ensembleData.about">-->
+    <!--<img class="ensemble__image"-->
+         <!--[src]="item.imageSource"-->
+         <!--alt="image ensemble">-->
+    <!--<div class="ensemble__paragraphs-container">-->
+      <!--<p class="ensemble__paragraph" *ngFor="let p of item.paragraphs">{{ p }}</p>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<app-title [title]="'ensembles'"></app-title>
+<section class="content ensemble-content-preview">
+  <a class="content-article content-article--ensemble ensemble-content-preview__item"
+     [routerLink]="['/ensembles', item.id]"
+     *ngFor="let item of ensembles"
+  >
+    <div class="ensemble-content-preview__image"
+         [ngStyle]="{'background-image': 'url(' + ( item.img.link ) + ')'}"
+    >
+    </div>
+
+    <p class="ensemble-content-preview__caption">
+      <span class="ensemble-content-preview__title"
+            [attr.title]="item.name"
+      >
+        {{item.name}}
+      </span>
+    </p>
+  </a>
+</section>
+
+  <!--</div>-->
+  <!--<app-title [title]="'information'"></app-title>&ndash;&gt;-->
+  <!--<div class="ensemble__data"-->
+       <!--*ngFor="let item of ensembleData.about">-->
+    <!--<img class="ensemble__image"-->
+         <!--[src]="item.imageSource"-->
+         <!--alt="image ensemble">-->
+    <!--<div class="ensemble__paragraphs-container">-->
+      <!--<p class="ensemble__paragraph" *ngFor="let p of item.paragraphs">{{ p }}</p>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="ensemble__teachers">
+    <app-title [title]="'teachers'"></app-title>
+    <span *ngFor="let teacher of ensembleData.teachers; let i = index">
+      <a class="ensemble__teacher-link" [routerLink]="['/teacher', teacher.id]">{{ teacher.name }}</a>
+      {{ (i == ensembleData.teachers.length - 1) ? '' : ', ' }}
+    </span>
+  </div>-->
+<!--</div>-->
+<app-spinner></app-spinner>

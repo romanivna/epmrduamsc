@@ -1,0 +1,108 @@
+<form [formGroup]="newsItemForm" novalidate class="news-item" *ngIf="newsItem && galleryClose">
+  <div class="img-wrapper">
+    <div class="news-item__img-box img-box">
+      <div class="img-wrapper__background-block">
+      </div>
+        <div class="img-box__img"
+             *ngIf="newsItem.img"
+             [ngStyle]="{'background-image': 'url(' + ( newsItem.img.link ) + ')'}">
+
+      </div>
+      <a class="img-box__uploading"
+         (click)="showAlbums()">
+      <span class="img-box__uploading-text img-wrapper-icon">
+        <i class="fa fa-picture-o" aria-hidden="true">
+          <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+        </i>
+      </span>
+      </a>
+    </div>
+
+    <div class="img-box__local-upload-wrapper content-box">
+      <p class="asterisk"></p>
+      <app-dnd-file-upload class="img-box__local-upload img-wrapper-input"
+                           (fileUploaded)="addImage($event)"
+                           [title]="'Choose image'">
+      </app-dnd-file-upload>
+      <div *ngIf="savePressed" class="content-box__alert">
+        <p *ngIf="!newsItem.img && savePressed">
+          {{ 'validationInvalidRequired' | localizator}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="content-box">
+    <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Title' | localizator }}</h2>
+    <input class="content-box__header" id="title" formControlName="title" maxlength="50" minlength="2" required  [placeholder]="'Enter the title' | localizator ">
+    <div class="content-box__alert">
+      <div *ngIf="(newsItemForm.get('title').touched ||  savePressed)">
+        <p *ngIf="newsItemForm.get('title').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+      </div>
+      <div>
+        <p *ngIf="newsItemForm.get('title').hasError('minlength')">{{ 'validationInvalidLengthMin' | localizator}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <p class="content-box__prop-name content-box__prop-name--required">{{ 'Create news' | localizator }}:</p>
+    <div class="content-box__langs">
+      <label for="isUkrainian" class="content-box__lang">
+        <input type="checkbox"  id="isUkrainian" formControlName="isUkrainian">
+        {{ 'In Ukrainian' | localizator }}
+      </label>
+      <label for="isRussian" class="content-box__lang">
+        <input type="checkbox" id="isRussian" formControlName="isRussian">
+        {{ 'In Russian' | localizator }}
+      </label>
+      <label for="isEnglish" class="content-box__lang">
+        <input type="checkbox" id="isEnglish" formControlName="isEnglish">
+        {{ 'In English' | localizator }}
+      </label>
+      <div class="content-box__alert">
+        <div *ngIf="(savePressed || (newsItemForm.get('isUkrainian').touched) ||
+                                    (newsItemForm.get('isRussian').touched) ||
+                                    (newsItemForm.get('isEnglish').touched))">
+          <p *ngIf="!newsItemForm.get('isUkrainian').value  &&
+                    !newsItemForm.get('isRussian').value &&
+                    !newsItemForm.get('isEnglish').value">
+            {{ 'validationInvalidRequired' | localizator}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <p class="asterisk"></p>
+    <ckeditor formControlName="content" id="content" [config]="ckEditorConfig" required></ckeditor>
+    <div *ngIf="(newsItemForm.get('content').touched ||  savePressed)" class="content-box__alert">
+        <p *ngIf="!newsItemForm.controls.content.value">{{ 'validationInvalidRequired' | localizator}}</p>
+    </div>
+  </div>
+
+  <app-error-message *ngIf="errMessage" [message]="errMessage" (onEnding)="errMessage = null"></app-error-message>
+
+  <div class="news-item__tools">
+    <button class="news-item__btn news-item__btn--save"
+       (click)="suggestToSave()">
+      {{ 'Save' | localizator }}
+    </button>
+    <button class="news-item__btn news-item__btn--cancel"
+        (click)="suggestToCancel()">
+      {{ 'Cancel' | localizator }}
+    </button>
+  </div>
+
+</form>
+
+<app-albums-modal-window *ngIf="imgSelection" (onAlbumChosen)="updateImg($event)"></app-albums-modal-window>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+
+<app-spinner></app-spinner>

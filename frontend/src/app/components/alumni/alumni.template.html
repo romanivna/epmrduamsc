@@ -1,0 +1,20 @@
+<app-title [title]="'alumni'">
+</app-title>
+<div class="content">
+  <app-alumni-item *ngFor="let item of alumni"
+                   class="content-article alumni-item"
+                   [source]="item.img.link"
+                   [title]="item.name"
+                   (click)="activeItem=item; showModal=true">
+  </app-alumni-item>
+</div>
+<app-show-next-button *ngIf="!allItemsLoaded" (click)="onNextAlumniItemsClick()"></app-show-next-button>
+<app-modal-window *ngIf="showModal" (close)="showModal=false">
+  <div class="modal">
+    <img class="modal__image"
+         [src]="activeItem.img.link"
+         alt="activePhoto">
+    <p class="modal__title">{{activeItem.name}}</p>
+    <div class="modal__text">{{activeItem.about}}</div>
+  </div>
+</app-modal-window>

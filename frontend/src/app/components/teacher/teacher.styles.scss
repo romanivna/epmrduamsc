@@ -1,0 +1,152 @@
+@import '../../shared/styles/colors';
+
+$arrow-icon-color: #555;
+$arrow-icon-color-hov: #111;
+
+.teacher-wrapper {
+  position: relative;
+  padding: 0 30px 30px;
+  min-height: 300px;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  height: 100%;
+  text-align: center;
+  font-size: 2rem;
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+
+  &__icon {
+    position: absolute;
+    color: $arrow-icon-color;
+
+    &:hover {
+      color: $arrow-icon-color-hov;
+    }
+  }
+
+  &-deactive {
+    visibility: hidden;
+  }
+}
+
+.teacher {
+  padding: 0 5%;
+  color: $color-darkgray;
+
+  &__intro {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__photo-wrapper {
+    width: 50%;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &__photo {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+  }
+
+  &__personal-info {
+    padding: 20px 5%;
+    width: 50%;
+
+    @media screen and (max-width: 768px) {
+      padding: 20px 0;
+      width: 100%;
+    }
+  }
+
+  &__about {
+    padding-top: 20px;
+
+    &-title {
+      padding: 10px 0;
+      text-align: center;
+    }
+  }
+
+}
+
+.personal-info {
+  &__item {
+    display: flex;
+    margin: 10px 0;
+  }
+
+  &__category {
+    padding-right: 10px;
+    width: 20%;
+    min-width: 100px;
+    max-width: 150px;
+    text-align: right;
+    font-weight: bold;
+
+    &-no {
+      width: 100%;
+    }
+  }
+
+  &__value {
+    &:not(:last-child) {
+      :after {
+        content: ', ';
+      }
+    }
+  }
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 5%;
+
+  &__img {
+    width: 25%;
+
+    @media screen and (max-width: 768px) {
+      width: 49%;
+    }
+
+    @media screen and (max-width: 468px) {
+      width: 100%;
+    }
+  }
+}
+
+.img {
+  &__photo {
+    display: block;
+    margin: auto;
+    height: auto;
+    cursor: pointer;
+  }
+}
+
+.img-modal {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+}

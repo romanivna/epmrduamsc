@@ -1,0 +1,134 @@
+<app-title [title]="'registration'"></app-title>
+<form class="create-user-form"
+      [formGroup]="createUserForm"
+      (ngSubmit)="createUser(createUserForm.value)"
+      method="post">
+  <div class="create-user-form__column">
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-user-secret" aria-hidden="true"></i>
+      <select class="create-user-form__input
+                     create-user-form__input--select"
+              formControlName="role"
+              #role>
+        <option class="create-user-form__option"
+                *ngFor="let role of roles"
+                [value]="role.value">
+          {{ role.name | localizator }}
+        </option>
+      </select>
+    </label>
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-user-circle" aria-hidden="true"></i>
+      <input class="create-user-form__input"
+             type="text"
+             [placeholder]="'First Name' | localizator"
+             formControlName="firstName"
+             #firstName>
+    </label>
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+      <input class="create-user-form__input"
+             type="text"
+             [placeholder]="'Last Name' | localizator"
+             formControlName="lastName"
+             #lastName>
+    </label>
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-envelope" aria-hidden="true"></i>
+      <input class="create-user-form__input"
+             type="text"
+             [placeholder]="'email' | localizator"
+             formControlName="email"
+             #email>
+    </label>
+  </div>
+  <div class="create-user-form__column">
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-phone" aria-hidden="true"></i>
+      <input class="create-user-form__input"
+             type="text"
+             placeholder="+38 (067) 123-45-67"
+             [textMask]="{mask: mask}"
+             formControlName="phoneNumber"
+             #phoneNumber>
+    </label>
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-user-circle" aria-hidden="true"></i>
+      <input class="create-user-form__input"
+             type="text"
+             [placeholder]="'login' | localizator"
+             formControlName="login"
+             #login>
+    </label>
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-key" aria-hidden="true"></i>
+      <input class="create-user-form__input"
+             type="password"
+             [placeholder]="'password' | localizator"
+             formControlName="password"
+             #password>
+    </label>
+    <label class="create-user-form__input-container form-group">
+      <i class="fa fa-unlock" aria-hidden="true"></i>
+      <input class="create-user-form__input"
+             type="password"
+             [placeholder]="'passwordConfirmation' | localizator"
+             formControlName="passwordConfirm"
+             #passwordConfirm>
+    </label>
+    <div class="create-user-form__submit-container">
+      <button class="create-user-form__button
+                     create-user-form__button--back"
+              type="button"
+              (click)="back()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        {{'back' | localizator}}
+      </button>
+      <button class="create-user-form__button
+                     create-user-form__button--submit"
+              type="submit"
+              [disabled]="createUserForm.invalid || password.value !== passwordConfirm.value">
+        {{'register' | localizator}}
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</form>
+
+<div class="error-container"
+     *ngIf="firstNameError.value">
+  {{firstNameError.value}}
+</div>
+<div class="error-container"
+     *ngIf="lastNameError.value">
+  {{lastNameError.value}}
+</div>
+<div class="error-container"
+     *ngIf="emailError.value">
+  {{emailError.value}}
+</div>
+<div class="error-container"
+     *ngIf="phoneNumberError.value">
+  {{phoneNumberError.value}}
+</div>
+<div class="error-container"
+     *ngIf="passwordError.value">
+  {{passwordError.value}}
+</div>
+<div class="error-container"
+     *ngIf="passwordConfirmError.value">
+  {{passwordConfirmError.value}}
+</div>
+<div class="error-container"
+     *ngIf="loginError.value">
+  {{loginError.value}}
+</div>
+<div class="success-message"
+     *ngIf="successMsg">
+  {{ successMsg | localizator }}
+</div>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+<app-spinner></app-spinner>

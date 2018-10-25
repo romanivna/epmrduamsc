@@ -1,0 +1,16 @@
+<header class="header">
+  <div class="header-misc">
+    <div class="header-misc__school-info">
+      <app-logo *ngIf="schoolInfo" [src]="schoolInfo.logo[getLangId()]"></app-logo>
+      <div class="header-aside">
+        <app-navigation class="header-nav"></app-navigation>
+      </div>
+    </div>
+    <div class="header-misc__instruments">
+      <!--<app-search></app-search>-->
+      <app-localization></app-localization>
+      <app-user-state></app-user-state>
+    </div>
+    <app-to-top-button></app-to-top-button>
+  </div>
+</header>

@@ -1,0 +1,19 @@
+
+<div *ngIf="extended" class="btn">
+  <a class="btn__add-ensemble-item"
+     [routerLink]="['/', 'admin', 'ensembles', 'ensembles-creation']"
+     title="{{'add ensemble' | localizator}}">
+    <i class="fa fa-plus btn__icon" aria-hidden="true"></i>
+  </a>
+</div>
+
+<app-ensembles-item-preview
+  *ngFor="let ensembleItem of ensembles"
+  [ensembleItem]="ensembleItem"
+  [extended]="extended"
+  (removedEnsemble)="suggestToRemove($event)">
+</app-ensembles-item-preview>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutRemoving($event)">
+</app-confirmation-modal-window>

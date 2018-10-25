@@ -1,0 +1,22 @@
+<section class="albums-window">
+  <div class="albums-window__sections">
+    <!-- <app-albums class="albums-window__list"
+                [modalWindow]="true"
+                #spy>
+    </app-albums> -->
+    <!-- <app-album-preview class="albums-window__preview"
+                       *ngIf="spy.activeAlbum"
+                       [activeAlbumImgSources]="spy.activeAlbum"
+                       (onChosen)="suggestToUpdate($event)"
+    >
+    </app-album-preview> -->
+    <app-mock-albums
+    (onChosen)="suggestToUpdate($event)"
+    >
+    </app-mock-albums>
+  </div>
+  <div class="albums-window__tools">
+    <a (click)="cancel()" class="albums-window__btn">Cancel</a>
+  </div>
+</section>
+<app-spinner></app-spinner>

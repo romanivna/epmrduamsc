@@ -1,0 +1,32 @@
+<div class="department-preview">
+  <div class="department-preview__img-box">
+    <a [routerLink]="['/departments', cuttedDepartmentItem.id ]">
+      <div class="department-preview__img"
+           [ngStyle]="{'background-image': 'url(' + ( departmentItem.img.link ) + ')'}">
+      </div>
+    </a>
+  </div>
+  <div class="department-preview-text">
+    <div class="department-preview-text__head">
+      <a [routerLink]="['/departments', cuttedDepartmentItem.id ]" class="department-preview-text__head-center">
+        <p class="department-preview-text__header">{{departmentItem.name}}</p>
+      </a>
+    </div>
+    <p class="department-preview-text__content" [innerHTML]="departmentItem.description"></p>
+    <hr class="line" *ngIf="!extended">
+  </div>
+
+  <div class="department-preview__tools" *ngIf="extended">
+    <a [routerLink]="['/admin/departments', departmentItem.id]"
+       class="department-preview__btn"
+       title="{{'edit department' | localizator}}">
+      <i class="fa fa-pencil department-preview__icon" aria-hidden="true"></i>
+    </a>
+    <a  class="department-preview__btn"
+        (click)="remove()"
+        title="{{'delete department' | localizator}}">
+      <i class="fa fa-times department-preview__icon" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>
+<app-spinner></app-spinner>

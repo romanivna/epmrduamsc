@@ -1,0 +1,21 @@
+<div class="header-misc__lang-switcher">
+  <p class="header-misc__current-lang"> {{ currentLang }} </p>
+  <div class="header-misc__wrapper">
+    <div class="header-misc__lang-menu">
+      <label class="header-misc__label" *ngFor="let item of supportedLangs">
+        <input type="radio"
+               name="item.lang"
+               [value]="currentLang"
+               [checked]="item.lang === currentLang"
+               (change)="selectLang(item.lang)"
+               hidden>
+        <span class="header-misc__lang-selector" [ngClass]="{
+              'header-misc__lang-selector--active' : item.title === currentLang,
+              'header-misc__lang-selector--inactive' : item.title !== currentLang
+            }">
+          {{item.title}}
+        </span>
+      </label>
+    </div>
+  </div>
+</div>

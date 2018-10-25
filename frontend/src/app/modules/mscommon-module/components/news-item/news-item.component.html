@@ -1,0 +1,31 @@
+<div class="news-item">
+  <div *ngIf="newsItem" class="img-box">
+    <img class="img-box__img"
+         (click)="showModalWindow = true"
+         [src]="newsItem?.img.link"
+         alt="{{newsItem?.header}}">
+  </div>
+
+  <div class="content-wrapper">
+    <div class="content-box">
+      <p class="content-box__header">{{newsItem?.header}}</p>
+    </div>
+
+    <div class="date-box">
+      <p class="date-box__date">
+        <app-date-box [date]="newsItem?.date"></app-date-box>
+      </p>
+    </div>
+  </div>
+  <div class="content-box__content" [innerHTML]="content | safeHtml"></div>
+</div>
+
+<app-modal-window *ngIf="showModalWindow"
+                  (close)="showModalWindow = false">
+  <div class="img-box img-box--modal">
+    <img class="img-modal"
+         [src]="newsItem.img.link"
+         alt="{{newsItem.header}}">
+  </div>
+</app-modal-window>
+<app-spinner></app-spinner>

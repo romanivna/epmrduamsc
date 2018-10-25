@@ -1,0 +1,71 @@
+<div *ngIf="extended" class="btn">
+  <a class="btn__add-event"
+     [routerLink]="['/', 'admin', 'events', 'events-creation']"
+     title="{{'add event' | localizator}}">
+    <i class="fa fa-plus btn__icon" aria-hidden="true"></i>
+  </a>
+</div>
+<section class="content">
+  <a *ngFor="let item of eventsContentPreviewItems"
+     class="content-article content-article--events events-content-preview__item"
+     [routerLink]="['/events', item.id ]">
+
+    <p class="events-content-preview__date
+      {{ isPastEvent(item) ? 'events-content-preview__date--past' : '' }}">
+      <span class="events-content-preview__weekday">
+        {{ item.date[0] | date: "EEE" | localizator }}
+      </span>
+      <span class="events-content-preview__period">
+        <ng-container *ngIf="isSecondDate(item.date)">
+          <ng-container *ngIf="isDatesInSameYear(item.date); else isNotDatesInSameYear">
+            <ng-container *ngIf="isDatesInSameMonth(item.date)">
+              {{ item.date[0] | date: "d" | localizator }}
+            </ng-container>
+            <ng-container *ngIf="!isDatesInSameMonth(item.date)">
+              {{ item.date[0] | date: "d MMM" | localizator }}
+            </ng-container>
+          </ng-container>
+          <ng-template #isNotDatesInSameYear>
+            <ng-container>
+              <app-date-box [date]="item.date[0]"></app-date-box>
+            </ng-container>
+          </ng-template>
+        </ng-container>
+        <ng-container  *ngIf="!isDatesInSameDay(item.date)">
+          -
+          <app-date-box [date]="item.date[1]"></app-date-box>
+        </ng-container>
+
+      </span>
+    </p>
+    <h3 class="events-content-preview__header">{{item.header}}</h3>
+    <p class="events-content-preview__time"><span>{{item.time.from }}</span> - <span>{{item.time.to}}</span></p>
+    <p class="events-content-preview__title">{{item.title}}</p>
+    <div class="events-content-preview__tools" *ngIf="extended">
+      <a [routerLink]="['/admin/events', item.id]"
+         class="events-content-preview__tools-btn"
+         title="{{'edit event' | localizator}}">
+        <i class="fa fa-pencil events-content-preview__icon" aria-hidden="true"></i>
+      </a>
+      <a  class="events-content-preview__tools-btn"
+          (click)="suggestToRemove($event, item.id)"
+          title="{{'delete event' | localizator}}">
+        <i class="fa fa-times events-content-preview__icon" aria-hidden="true"></i>
+      </a>
+    </div>
+  </a>
+</section>
+<a class="events-content-preview__btn"
+   routerLink="/events"
+   *ngIf="loadEventsItemsPerRequest === eventsItemsCountPerRequest">
+  {{'see more upcoming events' | localizator}}
+</a>
+<app-show-next-button
+  *ngIf="!allEventsLoaded && !isArrowToLoadMore"
+  (showNext)="onNextEventsItemsClick()">
+</app-show-next-button>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutRemoving($event)">
+</app-confirmation-modal-window>
+<app-spinner></app-spinner>

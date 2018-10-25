@@ -1,0 +1,21 @@
+@import '../../../../shared/styles/colors';
+
+.btn {
+  position: relative;
+  margin: 1rem 0;
+  width: 100%;
+  height: 2.5rem;
+
+  &__add-news-item {
+    position: absolute;
+    right: 0;
+    width: 2.5rem;
+    text-align: center;
+    line-height: 2.5rem;
+    font-size: 1.4rem;
+
+    &:hover {
+      color: $color-red;
+    }
+  }
+}

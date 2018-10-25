@@ -1,0 +1,79 @@
+<app-title [title]="'about school'"></app-title>
+
+<form [formGroup]="aboutUsForm">
+  <div class="content-box editor-container">
+    <ckeditor #editor id="content" formControlName="content" [config]="ckEditorConfig"></ckeditor>
+  </div>
+</form>
+
+<app-title [title]="'documents'"></app-title>
+<app-dnd-file-upload class="input-for-albums__dnd"
+                     (fileUploaded)="addFile($event)"
+                     [title]="'Choose file'"
+                     [dndHeight]="'80px'"
+                     [dndTop]="'-30px'"
+                     [couldFiles]="true">
+</app-dnd-file-upload>
+
+<div class="img-box">
+
+  <div class ="img-box__item img-box__unsaved-item"
+       *ngFor="let image of docImages; trackBy: trackByFn"
+       (click)="openDocument(image.link)"
+       [ngStyle]="{'background-image': 'url('+ image?.link + ')'}">
+    <div class="documents-item__delete">
+      <a  class="documents-item__delete-btn"
+          (click)="deleteUnsavedDocument(image.id); $event.stopPropagation();"
+          title="{{'delete document' | localizator}}">
+        <i class="fa fa-times documents-item__icon" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class ="img-box__item img-box__unsaved-item"
+       *ngFor="let image of docFiles; trackBy: trackByFn"
+       (click)="openDocument(image.link)">
+    <div class="documents-item__delete">
+      <a  class="documents-item__delete-btn"
+          (click)="deleteUnsavedDocument(image.id, docFiles); $event.stopPropagation();"
+          title="{{'delete document' | localizator}}">
+        <i class="fa fa-times documents-item__icon" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div [ngClass]="'img-box__file-uploaded'"></div>
+    <p class="file-uploaded__title">{{image.title}}</p>
+  </div>
+
+  <div class ="img-box__item"
+       *ngFor="let image of documents; trackBy: trackByFn"
+       (click)="openDocument(image.link)"
+       [ngStyle]="{'background-image': 'url('+ image?.link + ')'}">
+    <div class="documents-item__delete">
+      <a  class="documents-item__delete-btn"
+          (click)="deleteSavedDocument(image.id); $event.stopPropagation();"
+          title="{{'delete document' | localizator}}">
+        <i class="fa fa-times documents-item__icon" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div *ngIf="image['type'] === 'pdf'" [ngClass]="'img-box__file-uploaded'"></div>
+    <p *ngIf="image['type'] === 'pdf'" [ngClass]="'file-uploaded__title'">{{image.title}}</p>
+  </div>
+
+</div>
+
+<div class="documents-item__tools">
+  <button class="documents-item__btn documents-item__btn--save"
+          (click)="suggestToSave()">
+    {{ 'Save' | localizator }}
+  </button>
+  <button class="documents-item__btn documents-item__btn--cancel"
+          (click)="suggestToCancel()">
+    {{ 'Cancel' | localizator }}
+  </button>
+</div>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+
+<app-spinner></app-spinner>

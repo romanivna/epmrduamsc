@@ -1,0 +1,45 @@
+<section class="head-content">
+  <a class="head-content__btn-add-alumni"
+     [routerLink]="['/admin', 'alumni-management', 'alumni-creation']"
+     title="{{ 'add alumni' | localizator }}">
+    <i class="fa fa-plus btn__icon" ></i>
+  </a>
+</section>
+<section class="alumni-management">
+<div *ngFor="let alumnus of alumni"
+   class="alumni-management__item">
+<!--
+     [routerLink]="['/admin', 'alumni', alumnus.id]"-->
+  <a class="alumni-management__img-wrapper">
+    <img class="alumni-management__img-wrapper-alumni-img"
+        src="{{ alumnus.img.link }}"
+        alt="{{ alumnus.name }}"
+    />
+  </a>
+
+  <h3 class="alumni-management__title">{{ alumnus.name }}</h3>
+  <h5 class="alumni-management__text">{{ alumnus.about }}</h5>
+
+ <div class="alumni-management__tools">
+    <a [routerLink]="['/admin', 'alumni-management', alumnus.id]"
+       class="alumni-management__tools-btn"
+       title="{{'edit alumni' | localizator}}">
+      <i class="fa fa-pencil alumni-management__icon" aria-hidden="true"></i>
+    </a>
+    <a  class="alumni-management__tools-btn"
+        (click)="deleteAlumni(alumnus.id)"
+        title="{{'delete alumni' | localizator}}">
+      <i class="fa fa-times alumni-management__icon" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>
+</section>
+
+<app-show-next-button *ngIf="!allItemsLoaded" (click)="onNextAlumniItemsClick()"></app-show-next-button>
+
+<app-confirmation-modal-window
+[question]="confirmQuestion"
+(onVoted)="voteForDeleting($event)">
+</app-confirmation-modal-window>
+
+<router-outlet></router-outlet>

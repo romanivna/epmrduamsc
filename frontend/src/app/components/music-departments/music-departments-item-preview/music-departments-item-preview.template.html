@@ -1,0 +1,16 @@
+<div class="department-preview" id="{{musicDepartmentsItemPreview.id}}">
+  <div class="department-preview__general">
+    <h2 class="department-preview__title">{{musicDepartmentsItemPreview.name | localizator}}</h2>
+    <div class="department-preview__description">{{musicDepartmentsItemPreview.description}}</div>
+  </div>
+  <div class="department-preview__head">
+    <a class="department-preview__all-teachers"
+      [routerLink]="['/all-teachers', (musicDepartmentsItemPreview.id)]">
+        {{'all teachers' | localizator | uppercase}}
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+    <app-teachers-preview-item *ngIf="headTeacher" [teacher]="headTeacher">
+    </app-teachers-preview-item>
+  </div>
+</div>
+<app-spinner></app-spinner>

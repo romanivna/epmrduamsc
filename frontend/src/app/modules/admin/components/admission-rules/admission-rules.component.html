@@ -1,0 +1,66 @@
+<app-title [title]="'admission rules'"></app-title>
+
+<div class="admisson-rules">
+  <article class="admission-rules__section">
+    <form [formGroup]="admissionRulesForm" class="admission-rules__form" novalidate>
+
+      <div class="form-group">
+
+        <label class="form__field-title">{{'Name' | localizator}}</label>
+        <input class="form__field-input" id="header" formControlName="header" maxlength="200" minlength="2" required  [placeholder]="'Enter the title' | localizator ">
+        <div class="content-box__alert">
+          <div *ngIf="(admissionRulesForm.get('header').touched ||  savePressed)">
+            <p *ngIf="admissionRulesForm.get('header').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+          </div>
+          <div>
+            <p *ngIf="admissionRulesForm.get('header').hasError('minlength')">{{ 'validationInvalidLengthMin' | localizator}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-box editor-container">
+        <p class="asterisk"></p>
+        <ckeditor #editor id="content" formControlName="content" [config]="ckEditorConfig" required></ckeditor>
+        <div *ngIf="(admissionRulesForm.get('content').touched ||  savePressed)" class="content-box__alert">
+          <p *ngIf="!admissionRulesForm.controls.content.value">{{ 'validationInvalidRequired' | localizator}}</p>
+        </div>
+      </div>
+
+      <app-error-message *ngIf="errMessage" [message]="errMessage" (onEnding)="errMessage = null"></app-error-message>
+
+      <div class="img-box__local-upload-wrapper content-box">
+        <div class="file-uploaded"
+            *ngIf="admissionRules.img.link">
+          <p class="file-uploaded__name">{{admissionRules.img.title}}</p>
+        </div>
+        <p class="asterisk"></p>
+        <app-dnd-text-file-upload class="img-box__local-upload img-wrapper-input"
+                                  (fileUploaded)="addFile($event)"
+                                  [title]="'Choose file'">
+        </app-dnd-text-file-upload>
+        <div *ngIf="savePressed" class="content-box__alert">
+          <!-- <p *ngIf="!newsItem.img && savePressed">
+            {{ 'validationInvalidRequired' | localizator}}
+          </p> -->
+        </div>
+      </div>
+
+
+      <div class="admission-rules__tools">
+        <button class="admission-rules__btn admission-rules__btn--save" (click)="suggestToSave()">
+          {{ 'Save' | localizator }}
+        </button>
+        <button class="admission-rules__btn admission-rules__btn--cancel" (click)="suggestToCancel()">
+          {{ 'Cancel' | localizator }}
+        </button>
+      </div>
+
+    </form>
+    <app-confirmation-modal-window [question]="questionForConfirmation"
+                                  (onVoted)="decideAboutVoting($event)">
+    </app-confirmation-modal-window>
+
+
+  </article>
+</div>
+<app-spinner></app-spinner>

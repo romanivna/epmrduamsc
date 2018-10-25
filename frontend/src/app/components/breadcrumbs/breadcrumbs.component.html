@@ -1,0 +1,15 @@
+<div *ngIf="currentBreadcrumbs.length > 1" class="breadcrumbs">
+  <div class="container">
+    <ol [ngClass]="{ 'breadcrumb': allowBootstrap }">
+      <li *ngFor="let breadcrumb of currentBreadcrumbs; let last = last" class="breadcrumbs__list"
+      [ngClass]="{ 'breadcrumbs__list--english': isEnglish }">
+        <a *ngIf="!last" [routerLink]="hasParams(breadcrumb)"
+            class="breadcrumbs__link"
+            [ngClass]="{ 'nav__menu-link--english': isEnglish }">
+          {{breadcrumb.label | localizator }}
+        </a>
+        <span *ngIf="last">{{ breadcrumb.label | localizator }}</span>
+      </li>
+    </ol>
+  </div>
+</div>

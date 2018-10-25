@@ -1,0 +1,143 @@
+@import '../../shared/styles/variables';
+@import '../../shared/styles/colors';
+
+.history-page {
+  padding: 30px 15px;
+
+  &__title {
+    width: 100%;
+    overflow: hidden;
+
+    &-pic {
+      background-size: cover;
+      width: 100%;
+      height: 495px;
+
+      @media screen and (max-width: 768px) {
+        height: 400px;
+      }
+
+    }
+
+    &-text {
+      margin: 0 auto;
+      margin-bottom: 1rem;
+      padding-top: 36px;
+      padding-left: 90px;
+      width: 780px;
+      text-align: center;
+      line-height: 31px;
+      letter-spacing: .2px;
+      color: $color-deepgray;
+      font-size: 24px;
+
+      font-weight: 600;
+
+      @media screen and (max-width: 1200px) {
+
+        padding-left: 0;
+
+      }
+
+      @media screen and (max-width: 1024px) {
+
+        width: 90%;
+
+      }
+
+      @media screen and (max-width: 768px) {
+        font-size: 32px;
+      }
+
+    }
+
+  }
+
+  &__chronology {
+    display: flex;
+    flex-direction: column;
+    padding-top: 38px;
+
+    &-side-image {
+      flex-shrink: .4;
+      background-size: cover;
+
+      &-container {
+        flex-shrink: .6;
+        margin: 0 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        min-width: 500px;
+        min-height: 400px;
+        overflow: hidden;
+      }
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        min-width: 300px;
+      }
+
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-around;
+
+      &::after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+
+      padding-bottom: 35px;
+      color: $color-deepgray;
+
+      &:nth-of-type(even) {
+        flex-direction: row-reverse;
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+
+    }
+
+    &-year {
+
+      margin: 0 20px;
+      padding: 12px 0 15px;
+      font-size: 23px;
+      font-weight: 700;
+
+      @media screen and (max-width: 768px) {
+        font-size: 34px;
+      }
+
+    }
+
+    &-text {
+      margin: 0 20px;
+      padding-top: 20px;
+      text-align: justify;
+      line-height: 21px;
+      font-size: 17px;
+      font-weight: 600;
+
+      @media screen and (max-width: 768px) {
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+    }
+
+  }
+
+}

@@ -1,0 +1,79 @@
+@import '../../../../shared/styles/colors';
+@import '../../../../shared/styles/z-index';
+
+.confirmation {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: $zindex-modal-confirmation;
+  margin: auto;
+  box-shadow: 2px 2px 2px 2px $color-darkgray;
+  background-color: $color-white;
+  padding: 1rem 5%;
+  width: 50%;
+  min-width: 250px;
+  max-width: 600px;
+  height: 250px;
+  color: $color-darkgray;
+
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-modal-confirmation;
+    margin: auto;
+    background: $color-black-transparent-bg;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  &__question {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__variants {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  &__variant {
+    display: block;
+    width: 40%;
+    height: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 2rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    &--agree {
+      background-color: $color-lightgray;
+
+      &:hover {
+        background-color: $color-gray;
+      }
+    }
+
+    &--disagree {
+      background-color: $color-065red;
+
+      &:hover {
+        background-color: $color-red;
+      }
+    }
+  }
+}
+
+

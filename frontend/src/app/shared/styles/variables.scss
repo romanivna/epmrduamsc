@@ -1,0 +1,25 @@
+$menu-item-width: 100% / 6;
+$external-link-diameter: 40px;
+$content-article-width-large: (100% - 10) / 4;
+$content-article-width-medium: (100% - 4) / 2;
+$content-article-desktop-margin-right: 10% / 3;
+$external-link-width: (100% - 10) / 5;
+$grid-column-width: 100% / 12;
+
+$department-width-large: (100% - 10) / 4;
+$department-margin-large: 10% / 6;
+$department-width-medium: (100% - 4) / 2;
+$department-margin-medium: 2%;
+
+$album-width-large: (100% - 10) / 3;
+$album-margin-large: 10% / 4;
+$album-width-medium: (100% - 6) / 2;
+$album-margin-medium: 3%;
+
+$text-font-family: 'Oswald light', Arial, sans-serif;
+
+@mixin for-line-dots {
+  content: '●';
+  position: absolute;
+  top: -7px;
+}

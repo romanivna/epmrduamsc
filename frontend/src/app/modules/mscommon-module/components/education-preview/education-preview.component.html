@@ -1,0 +1,9 @@
+<app-title [title]="'education'"></app-title>
+<app-education-item-preview
+  *ngFor="let educationItem of education"
+  [educationItem]="educationItem"
+  [extended]="extended">
+</app-education-item-preview>
+
+
+<app-spinner></app-spinner>

@@ -1,0 +1,12 @@
+<label class="dnd__container" #container>
+  <span class="dnd__text">
+    <span class="dnd__choose-file">{{ title | localizator }}</span> {{'or drag it here' | localizator }}
+  </span>
+  <input id="input" class="dnd__input-file"
+         type="file"
+         (change)="OnInputChange($event)"
+         [attr.accept]="couldFiles ? 'image/*,.pdf' : 'image/*'"
+         [attr.multiple]="multiple"
+         [ngStyle]="{'height' : dndHeight, 'top' : dndTop}"
+  >
+</label>

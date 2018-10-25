@@ -1,0 +1,14 @@
+<div [formGroup]="form">
+  <div class="form__fields-title">{{name | localizator}}</div>
+  <div>
+    <app-text-field
+      class="form__field-container"
+      *ngFor="let field of fields; let i = index;"
+      [i]="i"
+      [field]="field"
+      [form]="form"
+      [id]="id"
+    >
+    </app-text-field>
+  </div>
+</div>

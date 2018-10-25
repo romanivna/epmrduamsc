@@ -1,0 +1,21 @@
+<div [formGroup]="form">
+  <div class="form__field-title" ngClass="{{radios[0].required ? 'form__elem-required' : ''}}">{{name | localizator}}</div>
+  <div *ngFor="let radio of radios; let i = index">
+    <input id="{{radio?.ctrlName + '_' + id + '_' + i}}"
+           type="radio"
+           name="{{radio?.ctrlName}}"
+           value="{{radio?.name?.toLowerCase()}}"
+           required="{{radio?.required}}"
+           formControlName="{{radio?.ctrlName}}"
+           tabindex="{{1+id}}"
+    />
+    <label [for]="radio?.ctrlName + '_' + id + '_' + i">
+      {{radio?.name | localizator}}
+    </label>
+  </div>
+  <div class="form__field-error" *ngIf="(form.get(radios[0].ctrlName).touched || form.get(radios[0].ctrlName).dirty) && form.get(radios[0].ctrlName).errors">
+    <div class="form__field-error-text" *ngIf="form.get(radios[0].ctrlName).errors.required">
+      {{"This field is required. You need to choose one of the previous options." | localizator}}
+    </div>
+  </div>
+</div>

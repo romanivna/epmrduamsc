@@ -1,0 +1,23 @@
+<app-title [title]="'our teachers'"></app-title>
+<section class="tab">
+  <li class='tab-item '
+      [routerLink]="['/our-teachers', ('all' | routeNormalizer)]"
+      (click)="changeTab($event)"
+      [ngClass] = "{'tab-item--active' : all_teachers}"
+  tab="all">
+
+    {{ 'All Teachers' | localizator | uppercase }}
+
+  </li>
+  <li class='tab-item '
+      [routerLink]="['/our-teachers', ('all-teachers' | routeNormalizer)]"
+      (click)="changeTab($event)"
+      [ngClass] = "{'tab-item--active' : !all_teachers}"
+  tab="all-teachers">
+
+    {{ 'Teachers by Department' | localizator | uppercase }}
+
+  </li>
+
+</section>
+<router-outlet></router-outlet>

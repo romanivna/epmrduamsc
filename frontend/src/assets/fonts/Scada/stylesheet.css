@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Scada';
+  font-style: normal;
+  font-weight: 700;
+  src: url('Scada-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Scada light';
+  font-style: normal;
+  font-weight: 400;
+  src: url('Scada-Regular.ttf') format('truetype');
+}

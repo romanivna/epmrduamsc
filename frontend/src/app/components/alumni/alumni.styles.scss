@@ -1,0 +1,19 @@
+@import '../../shared/styles/variables';
+@import '../../shared/styles/colors';
+
+.modal {
+  text-align: center;
+  color: $color-white;
+  font-size: 1.25rem;
+
+  &__image {
+    width: 50%;
+    min-width: 320px;
+    max-width: 960px;
+  }
+
+  &__title {
+    margin: 20px 0;
+    font-size: 2rem;
+  }
+}

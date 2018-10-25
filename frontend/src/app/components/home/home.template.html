@@ -1,0 +1,24 @@
+<div class="slider">
+  <carousel [sources]="imageSources" [config]="config"></carousel>
+</div>
+
+<app-title
+  [title]="'latest news'"
+  [linkFor]="'news'"
+  [isLine]=true>
+</app-title>
+<app-news-content-preview></app-news-content-preview>
+
+<app-title [title]="'events'" [linkFor]="'events'" [isLine]=true></app-title>
+<app-events-content-preview
+  [isArrowToLoadMore]=false
+  [loadEventsItemsPerRequest]="loadPerRequest">
+</app-events-content-preview>
+
+<app-title [title]="'music departments'"
+           [linkFor]="'departments'"
+           [isLine]=true
+>
+</app-title>
+<app-departments></app-departments>
+<app-spinner></app-spinner>

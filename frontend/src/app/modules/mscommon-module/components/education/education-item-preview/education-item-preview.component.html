@@ -1,0 +1,24 @@
+<div class="education-preview">
+  <div class="education-preview__img-box">
+    <a [routerLink]="['/admin/education', educationItem.id]">
+      <div class="education-preview__img"
+           *ngIf="educationItem.img"
+           [ngStyle]="{'background-image': 'url(' + ( educationItem.img.link ) + ')'}">
+      </div>
+    </a>
+  </div>
+  <div class="education-preview-text">
+    <div class="education-preview-text__head">
+        <p class="education-preview-text__header">{{educationItem.title}}</p>
+    </div>
+    <p class="education-preview-text__content" [innerHTML]="educationItem.description"></p>
+  </div>
+
+  <div class="education-preview__tools" *ngIf="extended">
+    <a [routerLink]="['/admin/education', educationItem.id]"
+       class="education-preview__btn"
+       title="{{'edit education' | localizator}}">
+      <i class="fa fa-pencil education-preview__icon" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>

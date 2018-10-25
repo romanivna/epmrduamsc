@@ -1,0 +1,130 @@
+<form [formGroup]="laureateForm" class="laureates">
+  <section class="laureates__wrapper">
+    <div class="img-wrapper">
+      <div class="teacher__img-box img-box">
+        <div class="img-wrapper__background-block">
+        </div>
+        <div class="img-box__img"
+             *ngIf="currentImg.img"
+             [ngStyle]="{'background-image': 'url(' + ( currentImg?.img.link) + ')'}">
+        </div>
+        <a class="img-box__uploading"
+           (click)="showAlbums()">
+        <span class="img-box__uploading-text img-wrapper-icon">
+          <i class="fa fa-picture-o" aria-hidden="true">
+            <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+          </i>
+        </span>
+        </a>
+      </div>
+
+      <div class="img-box__local-upload-wrapper content-box">
+        <app-dnd-file-upload class="img-box__local-upload img-wrapper-input"
+                             (fileUploaded)="addImage($event)"
+                             [title]="'Choose image'">
+        </app-dnd-file-upload>
+
+      </div>
+    </div>
+
+    <div class="data-wrapper">
+      <div class="content-box">
+        <section class="content-box__lang active">
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'Full name' | localizator }}</h2>
+            <label for="name" class="content-box__select-input-container">
+              <input class="content-box__header" id="name" formControlName="name" [placeholder]="'Enter the text' | localizator " maxlength="50" minlength="2">
+            </label>
+            <p class="asterisk"></p>
+            <div *ngIf="errName" class="content-box__alert">
+              <p>
+                {{ 'validationInvalidRequired' | localizator}}
+              </p>
+            </div>
+          </div>
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'Teacher' | localizator }}</h2>
+            <label for="teacher" class="content-box__select-input-container">
+              <input class="content-box__header" id="teacher" formControlName="teacher" [placeholder]="'Enter the text' | localizator " maxlength="50" minlength="2">
+            </label>
+            </div>
+
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'Department' | localizator }}</h2>
+            <label for="department" class="content-box__select-input-container">
+              <select class="content-box__header content-box__select-department" name="departments-list">
+
+                <option *ngFor="let department of departments"
+                        [ngValue]="department"
+                        [selected]="department.id === currentDepartment.id">
+                  {{ department.name }}
+                </option>
+
+              </select>
+            </label>
+          </div>
+          <div class="content-box__prop-container" *ngFor="let competition of laureate.competitions; let i = index;"
+               [ngClass]="{'content-box__prop-select' : i === 1, 'content-box__prop-new' : i > 0}">
+            <h2 class="content-box__prop-name" *ngIf="i === 0">{{ 'Competitions' | localizator }}</h2>
+            <label class="content-box__select-input-container"
+                   [ngClass]="{'content-box__select-input' : i > 0}">
+              <input class="content-box__header input-competitions" [id]="i" [placeholder]="'Enter the text' | localizator " [value]="competition.title">
+            </label>
+            <p class="asterisk" *ngIf="i === 0, else delete"></p>
+            <div class="content-box__prop-tools content-box__prop-main" *ngIf="i === 0, else delete">
+              <a class="head-content__btn-add-laureates"
+                 title="{{ 'add competition' | localizator }}"
+                 (click)="addCompetition()">
+                <i class="fa fa-plus content-box-prop-tools-plus"></i>
+              </a>
+            </div>
+            <ng-template #delete>
+              <div class="content-box__prop-tools content-box__prop-bonus">
+                <a class="head-content__btn-add-laureates"
+                   title="{{ 'delete competition' | localizator }}"
+                   (click)="deleteCompetition(i)">
+                  <i class="fa fa-times content-box-prop-tools-plus"></i>
+                </a>
+              </div>
+            </ng-template>
+            <div *ngIf="errCompetition && i === 0" class="content-box__alert">
+              <p>
+                {{ 'validationInvalidRequired' | localizator}}
+              </p>
+            </div>
+          </div>
+          <!--<div *ngIf="laureateForm.status !== 'VALID'" class="content-box__alert">-->
+            <!--<p *ngIf="!laureateForm.value.name_en && savePressed">-->
+              <!--{{ 'validationInvalidRequired' | localizator }}-->
+            <!--</p>-->
+            <!--<p *ngIf="laureateForm.value.name_en.length < 2 && savePressed">-->
+              <!--{{ 'validationInvalidLengthMin' | localizator }}-->
+            <!--</p>-->
+          <!--</div>-->
+        </section>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="laureate__tools">
+    <button class="laureate__btn laureate__btn--save"
+            (click)="suggestToSave()">
+      {{ 'Save' | localizator }}
+    </button>
+    <button class="laureate__btn laureate__btn--cancel"
+            (click)="suggestToCancel()">
+      {{ 'Cancel' | localizator }}
+    </button>
+  </div>
+
+</form>
+
+<app-albums-modal-window *ngIf="photoSelection" (onAlbumChosen)="updateImg($event)"></app-albums-modal-window>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+
+<app-spinner></app-spinner>

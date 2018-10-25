@@ -1,0 +1,66 @@
+<app-title [title]="'edit' | localizator"></app-title>
+
+<div class="wrapper">
+  <form *ngIf="currentUser"
+        class="edit-user-form"
+        [formGroup]="editUserForm"
+        (ngSubmit)="editUser(editUserForm.value)"
+  >
+    <h3 class="edit-user-form__header"> {{'user' | localizator }} : {{currentUser.login}}</h3>
+      <label class="edit-user-form__field">
+        <span class="edit-user-form__field-label">{{'First Name' | localizator}}:</span>
+      <input  class="edit-user-form__input"
+              formControlName="firstName"/>
+      </label>
+      <label class="edit-user-form__field">
+        <span class="edit-user-form__field-label">{{'Last Name' | localizator}}:</span>
+      <input  class="edit-user-form__input" formControlName="lastName"/>
+      </label>
+      <label class="edit-user-form__field">
+        <span class="edit-user-form__field-label">{{'email' | localizator}}:</span>
+      <input  class="edit-user-form__input" type="email" formControlName="email"/>
+      </label>
+      <label class="edit-user-form__field">
+        <span class="edit-user-form__field-label">{{'password' | localizator}}:</span>
+        <input  class="edit-user-form__input" type="password" formControlName="password"/>
+      </label>
+    <label class="edit-user-form__field">
+      <span class="edit-user-form__field-label">{{'passwordConfirmation' | localizator}}:</span>
+      <input  class="edit-user-form__input" type="password" formControlName="passwordConfirm"/>
+    </label>
+      <label class="edit-user-form__field">
+        <span class="edit-user-form__field-label">{{'role' | localizator}}:</span>
+      <select class="edit-user-form__input--select"
+              formControlName="role"
+              #role>
+        <option class="edit-user-form__option"
+                *ngFor="let role of roles"
+                [value]="role.value">
+          {{role.name}}
+        </option>
+      </select>
+      </label>
+    <div class="edit-user-form__field">
+      <label>{{'phone' | localizator}}: </label>
+      <input  class="edit-user-form__input" formControlName="phone"/>
+    </div>
+    <div class="edit-user-form__tools">
+      <button class="edit-user-form__button
+                     edit-user-form__button--submit"
+              type="submit"
+              [disabled]="editUserForm.invalid">
+        {{'Save' | localizator}}
+      </button>
+      <button class="edit-user-form__button edit-user-form__button--cancel"
+              (click)="cancelEditing()">
+        {{ 'Cancel' | localizator }}
+      </button>
+    </div>
+    <app-error-message [message]="message" (onEnding)="flushMessage()">
+    </app-error-message>
+  </form>
+</div>
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+<app-spinner></app-spinner>

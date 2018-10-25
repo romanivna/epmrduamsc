@@ -1,0 +1,130 @@
+@import '../../../../../shared/styles/colors';
+
+.event-header {
+  margin: 40px 0;
+  text-transform: none;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  &__img-wrapper {
+    float: left;
+    margin: 0 40px 20px 0;
+    width: 350px;
+
+    @media screen and (max-width: 768px) {
+      width: 40%;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 100%;
+    }
+
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__intro {
+    position: relative;
+    top: 0;
+    margin-left: 370px;
+    padding: 0 20px 10px;
+    width: calc(100% - 370px);
+
+    @media screen and (max-width: 1200px) {
+      width: 650px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 70%;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-left: 40%;
+      width: 60%;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin: 0;
+      width: 100%;
+    }
+
+    &--full {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    text-transform: capitalize;
+    line-height: 3rem;
+    color: $color-darkgray;
+    font-size: 1.5rem;
+
+    &--upcoming {
+      color: $color-red;
+    }
+  }
+
+  &__date {
+    border-top: 1px solid $color-gray;
+    border-bottom: 1px solid $color-gray;
+    line-height: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+
+    @media screen and (max-width: 768px) {
+      border: 0;
+    }
+  }
+
+  &__place-name {
+    text-transform: capitalize;
+    line-height: 1.5rem;
+    color: $color-darkgray;
+  }
+
+  &__place-link {
+    color: $color-red;
+  }
+
+  &__place-address {
+    text-transform: capitalize;
+    color: darken($color-gray, 25);
+  }
+
+  &__item {
+    @media screen and (max-width: 768px) {
+      text-align: center;
+    }
+  }
+}
+
+.img-modal {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.event-body {
+  margin: 10px 0 0 10px;
+}

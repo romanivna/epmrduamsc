@@ -1,0 +1,27 @@
+@import '../../../shared/styles/variables';
+@import '../../../shared/styles/colors';
+
+:host {
+  display: block;
+}
+
+.user-state__link {
+  color: $color-gray;
+  font-family: 'open_sansregular', sans-serif;
+  font-size: .9rem;
+  
+  font-weight: 300;
+}
+
+.header-misc {
+
+  &__login-icon {
+    position: relative;
+    top: -1px;
+    color: $color-black;
+  }
+
+  &__vertical-divisor {
+    color: $color-065red;
+  }
+}

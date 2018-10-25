@@ -1,0 +1,52 @@
+<nav class="nav header-nav">
+  <div class="nav__burger-btn">
+    <i class="fa fa-bars" (click)="toggleMenuState('menuState')"></i>
+  </div>
+  <ul class="nav__menu"
+      [ngClass]="{ 'nav__menu--opened': menuDropdownState.menuState }"
+      [appOnLinkFocused]="'.nav__menu-link--sub'">
+    <li *ngFor="let item of MenuLinks"
+        [ngClass]="{ 'nav__menu-item--dropdown': item.submenu,
+                      'nav__menu-link--english': isEnglish }"
+
+        class="nav__menu-item"
+        routerLinkActive="nav__menu-link--active">
+
+      <a *ngIf="item.submenu && !item.link"
+        href=""
+        [ngClass]="{ 'nav__menu-link--active': menuDropdownState[item.name],
+                      'nav__menu-link--english': isEnglish }"
+        class="nav__menu-link"
+        (click)="toggleMenuState(item.name, $event)" >
+        {{ item.name | localizator }}
+        <i class="fa fa-angle-down nav__submenu-icon" aria-hidden="true"></i>
+      </a>
+
+      <a *ngIf="item.submenu && item.link"
+        class="nav__menu-link"
+        (click)="navigateTo(item.link)">
+        {{ item.name | localizator }}
+        <i class="fa fa-angle-down nav__submenu-icon" aria-hidden="true"></i>
+      </a>
+
+      <a *ngIf="!item.submenu"
+         class="nav__menu-link"
+         [ngClass]="{'nav__menu-link--english': isEnglish }"
+         [routerLink]="(item.name | routeNormalizer)"
+         routerLinkActive="nav__menu-link--cursor-default">{{ item.name | localizator }}</a>
+
+      <ul *ngIf="item.submenu" class="nav__submenu"
+          [ngClass]="{ 'nav__submenu--opened': menuDropdownState[item.name] ,
+                       'nav__menu--opened': menuDropdownState[item.name] ,
+                      'nav__menu-link--english': isEnglish }">
+        <li *ngFor="let submenuLink of item.submenu" class="nav__submenu-item">
+          <a class="nav__submenu-link"
+             [routerLink]="(submenuLink | routeNormalizer)"
+             routerLinkActive="nav__menu-link--cursor-default">
+            {{ submenuLink | localizator }}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

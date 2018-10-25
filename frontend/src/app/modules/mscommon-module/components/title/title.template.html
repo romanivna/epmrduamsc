@@ -1,0 +1,17 @@
+<div class="title">
+
+  <p *ngIf="question" class="title__question">{{question | localizator}}</p>
+  <div class="title__container">
+
+    <div *ngIf="isLine" class="title__line title__line--first"></div>
+    <a *ngIf="!buttonText && linkFor" class="title__signature" [routerLink]="['/', (linkFor | routeNormalizer)]">{{title | localizator}}</a>
+    <p *ngIf="!buttonText && !linkFor" class="title__signature" (click)="onTitleClick($event)" >{{title | localizator}}</p>
+    <button *ngIf="buttonText" class="title__button">{{buttonText | localizator}}</button>
+    <div *ngIf="isLine" class="title__line title__line--last"></div>
+
+  </div>
+
+  <a *ngIf="buttonText && linkFor" class="title__signature" [routerLink]="['/', (linkFor | routeNormalizer)]">{{title | localizator}}</a>
+  <p *ngIf="buttonText && !linkFor" class="title__signature">{{title | localizator}}</p>
+
+</div>

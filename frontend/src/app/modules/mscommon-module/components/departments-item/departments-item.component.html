@@ -1,0 +1,25 @@
+<div class="departments-item">
+  <div *ngIf="department" class="img-box">
+    <img class="img-box__img"
+         (click)="showModalWindow = true"
+         [src]="department?.img.link"
+         alt="{{department?.name}}">
+  </div>
+
+  <div class="content-wrapper">
+    <div class="content-box">
+      <p class="content-box__name">{{department?.name}}</p>
+      <div class="content-box__description" [innerHTML]="description | safeHtml"></div>
+    </div>
+  </div>
+</div>
+
+<app-modal-window *ngIf="showModalWindow"
+                  (close)="showModalWindow = false">
+  <div class="img-box img-box--modal">
+    <img class="img-modal"
+         [src]="department.img.link"
+         alt="{{department.name}}">
+  </div>
+</app-modal-window>
+<app-spinner></app-spinner>

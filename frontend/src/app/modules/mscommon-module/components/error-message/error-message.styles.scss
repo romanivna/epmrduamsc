@@ -1,0 +1,16 @@
+@import '../../../../shared/styles/colors';
+
+.message {
+  margin: auto;
+  border: 1px solid $color-red;
+  padding: 1rem;
+  max-width: 320px;
+  line-height: 1.8rem;
+  color: $color-red;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  @media screen and (max-width: 468px) {
+    padding: 1rem 0;
+  }
+}

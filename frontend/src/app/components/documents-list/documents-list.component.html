@@ -1,0 +1,16 @@
+<div class="docs">
+  <div class="docs__item" *ngFor="let file of files; let index = index;">
+    <div class="docs__icon">
+      <i class="fa fa-file-{{getIconSuffix(file.type)}}" aria-hidden="true"></i>
+    </div>
+    <div class="docs__name">
+      {{ file.name }}
+    </div>
+    <div class="docs__remove">
+      <a class="docs__remove-link" (click)="removeFile(index)">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

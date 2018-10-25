@@ -1,0 +1,40 @@
+<section
+  class="admin-page">
+  <div  [ngClass]="{'admin-page-hide' : !isAdminPageOpen}"
+    class="admin-page__navigation admin-navigation">
+    <div class="admin-navigation__arrow">
+      <i class="fa fa-angle-double-right admin-navigation__arrow-icon"
+         [ngClass]="{ 'admin-navigation__arrow-icon--hidden': this.menuStateOpened }"
+         (click)="changeMenuState(true)"
+         aria-hidden="true"></i>
+      <i class="fa fa-angle-double-left admin-navigation__arrow-icon admin-navigation__arrow-icon--hidden"
+         [ngClass]="{ 'admin-navigation__arrow-icon--hidden': !this.menuStateOpened }"
+         (click)="changeMenuState(false)"
+         aria-hidden="true"></i>
+    </div>
+    <ul class="admin-navigation__links"
+      [ngClass]="{ 'admin-navigation__links--openned': this.menuStateOpened }">
+      <li *ngFor="let link of navigationLinks">
+        <a routerLink="{{ link.link }}"
+           (click)="changeMenuState(false)"
+           routerLinkActive="admin-navigation__link--active"
+          class="admin-navigation__link"
+          >
+          {{ link.name | localizator | uppercase }}
+        </a>
+      </li>
+      <li *ngFor="let aLink of adminNavigationLinks">
+        <a routerLink="{{ aLink.link }}"
+           routerLinkActive="admin-navigation__link--active"
+           class="admin-navigation__link"
+           *ngIf="isAdmin">
+          {{ aLink.name | localizator | uppercase }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="admin-page__content">
+    <router-outlet></router-outlet>
+  </div>
+</section>
+<app-spinner></app-spinner>

@@ -1,0 +1,10 @@
+<section class="mock-album">
+  <div class="mock-album__container">
+    <div class="mock-album__item"
+    *ngFor="let item of albumImage"
+    [ngStyle]="{'background-image': 'url(' + ( item.link ) + ')'}"
+    (click)="suggestToUpdate(item)">
+    </div>
+  </div>
+</section>
+<app-spinner></app-spinner>

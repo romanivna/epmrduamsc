@@ -1,0 +1,55 @@
+
+<div class="head-content">
+    <app-title [title]="(data | async)?.teachers?.department?.name" class="head-content__title"></app-title>
+  <div class="more">
+    <div class="more-button"
+         *ngIf="departments?.length > 1"
+         (click)="showDepartments()"
+         [ngClass]="{'arrow-rotate': departmentsShow}">
+      <i class="fa fa-angle-down"></i>
+    </div>
+
+    <div class="department-list">
+
+      <ul class="department-list__select" *ngIf="departmentsShow">
+        <li *ngFor="let department of departments" class="department-list__select-option"
+            (click)="goToDepartment(department.id)">
+          {{ department.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!--<app-title [title]="(data | async)?.teachers?.department?.name"></app-title>-->
+<div class="departments-navigation">
+  <a (click)="getPreviousDepartment()" class="departments-navigation--next departments-navigation__arrow-left"
+     [ngClass]="{'departments-navigation-deactive' : !previousDepartmentId}"
+  >
+    {{'Previous Department' | localizator}}
+  </a>
+  <a (click)="getNextDepartment()" class="departments-navigation--previous departments-navigation__arrow-right"
+     [ngClass]="{'departments-navigation-deactive' : !nextDepartmentId}">
+    {{'Next Department' | localizator}}
+  </a>
+</div>
+
+<div class="all-teachers" *ngIf="!!((data | async)?.teachers)">
+  <div *ngIf="noTeachers; else teachers">
+
+      <p class="no-teachers"> {{'no teachers' | localizator}}</p>
+
+    </div>
+
+  <ng-template #teachers>
+    <ng-container *ngFor="let teacher of (data | async)?.teachers?.data">
+      <app-teachers-preview-item
+        [teacher]="teacher"
+      class="all-teachers__item">
+      </app-teachers-preview-item>
+    </ng-container>
+  </ng-template>
+
+</div>
+<app-spinner></app-spinner>

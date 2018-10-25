@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>КССМШ ім. М.В.Лисенка</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+  <meta name="format-detection" content="telephone=no"/>
+
+  <!--
+    According to official CKEditor and ng-CKEditor documentation, all dependencies should be uploaded by they`r own cdn.
+    https://www.npmjs.com/package/ng2-ckeditor
+    This library has deep integration with they`r own dependencies, plus, this library is huge.
+    Thus, replace all cdn`s dependencies with our local dependencies is pretty hard.
+    And even more - uploading and integrating new plugins pulls even more dependencies to be uploaded.
+    Evensualy, with this kind of flow - any manipulations with this library become hard and time-consuming.
+  -->
+
+
+  <link rel="icon" type="image/x-icon" href="assets/img/header/man.png">
+  <link href="assets/spinner.css" rel="stylesheet">
+  <noscript>
+    <link href="assets/nojs-styles.css" rel="stylesheet">
+  </noscript>
+  <!--[if lt IE 9]>
+  <script>
+    document.createElement('app-root');
+  </script>
+  <![endif]-->
+</head>
+<body>
+<app-root>
+  <div class="spinner">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+    <div class="circle circle4"></div>
+    <div class="circle circle5"></div>
+    <div class="circle circle6"></div>
+    <div class="circle circle7"></div>
+    <div class="circle circle8"></div>
+    <div class="circle circle9"></div>
+    <div class="circle circle10"></div>
+    <div class="circle circle11"></div>
+    <div class="circle circle12"></div>
+  </div>
+</app-root>
+<noscript>
+  <div class="nojs-section">
+    <h1 class="nojs-section__message">На жаль, версія Вашого браузера застаріла.</h1>
+    <h2 class="nojs-section__message">Будь ласка, виберіть один із наведених нижче безкоштовних браузерів – і Ви
+      автоматично
+      перейдете до веб-сайту, де зможете завантажити його останню версію.</h2>
+    <div class="nojs-section__browser-list">
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link"
+           href="https://www.microsoft.com/en-us/download/internet-explorer.aspx">
+          <div class="nojs-section__browser-header">Internet Explorer</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/ie.png">
+          </div>
+        </a>
+      </div>
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link" href="https://www.google.com/chrome/browser/desktop/index.html">
+          <div class="nojs-section__browser-header">Google Chrome</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/chrome.png">
+          </div>
+        </a>
+      </div>
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link" href="https://www.mozilla.org/en-US/firefox/new/?f=110">
+          <div class="nojs-section__browser-header">Mozilla Firefox</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/mozilla.png">
+          </div>
+        </a>
+      </div>
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link"
+           href="https://www.microsoft.com/en-us/windows/microsoft-edge#BGUEZDy25hqXUOIt.97">
+          <div class="nojs-section__browser-header">Microsoft Edge</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/edge.png">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="nojs-section">
+    <h1 class="nojs-section__message">К сожалению, версия Вашего браузера устарела и не поддерживается нашим
+      сайтом.</h1>
+    <h2 class="nojs-section__message">Рекомендуем Вам установить и использовать в своей работе любой бесплатный
+      современный браузер.</h2>
+  </div>
+  <div class="nojs-section">
+    <h1 class="nojs-section__message">Unfortunately, version of your browser isn't supported anymore.</h1>
+    <h2 class="nojs-section__message">Please install latest version of free browser. Here are links for installing
+      browser
+      you prefer most.</h2>
+  </div>
+</noscript>
+<div id="old-browsers-support" style="display: none">
+  <div class="nojs-section">
+    <h1 class="nojs-section__message">На жаль, версія Вашого браузера застаріла.</h1>
+    <h2 class="nojs-section__message">Будь ласка, виберіть один із наведених нижче безкоштовних браузерів – і Ви
+      автоматично
+      перейдете до веб-сайту, де зможете завантажити його останню версію.</h2>
+    <div class="nojs-section__browser-list">
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link"
+           href="https://www.microsoft.com/en-us/download/internet-explorer.aspx">
+          <div class="nojs-section__browser-header">Internet Explorer</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/ie.png">
+          </div>
+        </a>
+      </div>
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link" href="https://www.google.com/chrome/browser/desktop/index.html">
+          <div class="nojs-section__browser-header">Google Chrome</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/chrome.png">
+          </div>
+        </a>
+      </div>
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link" href="https://www.mozilla.org/en-US/firefox/new/?f=110">
+          <div class="nojs-section__browser-header">Mozilla Firefox</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/mozilla.png">
+          </div>
+        </a>
+      </div>
+      <div class="nojs-section__browser-block">
+        <a class="nojs-section__browser-link"
+           href="https://www.microsoft.com/en-us/windows/microsoft-edge#BGUEZDy25hqXUOIt.97">
+          <div class="nojs-section__browser-header">Microsoft Edge</div>
+          <div class="nojs-section__browser-image">
+            <img src="assets/img/edge.png">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="nojs-section">
+    <h1 class="nojs-section__message">К сожалению, версия Вашего браузера устарела и не поддерживается нашим
+      сайтом.</h1>
+    <h2 class="nojs-section__message">Рекомендуем Вам установить и использовать в своей работе любой бесплатный
+      современный браузер.</h2>
+  </div>
+  <div class="nojs-section">
+    <h1 class="nojs-section__message">Unfortunately, version of your browser isn't supported anymore.</h1>
+    <h2 class="nojs-section__message">Please install latest version of free browser. Here are links for installing
+      browser
+      you prefer most.</h2>
+  </div>
+</div>
+<script>
+    var nAgt         = navigator.userAgent;
+    var browserName  = navigator.appName;
+    var fullVersion  = '' + parseFloat(navigator.appVersion);
+    var majorVersion = parseInt(navigator.appVersion, 10);
+    var nameOffset, verOffset, ix;
+
+    if ((verOffset = nAgt.indexOf("MSIE")) != -1) {
+      browserName = "IE";
+      fullVersion = nAgt.substring(verOffset + 5);
+    }
+
+    // In most other browsers, "name/version" is at the end of userAgent
+    else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) <
+      (verOffset = nAgt.lastIndexOf('/'))) {
+      browserName = nAgt.substring(nameOffset, verOffset);
+      fullVersion = nAgt.substring(verOffset + 1);
+      if (browserName.toLowerCase() == browserName.toUpperCase()) {
+        browserName = navigator.appName;
+      }
+    }
+
+    // trim the fullVersion string at semicolon/space if present
+    if ((ix = fullVersion.indexOf(";")) != -1)
+      fullVersion = fullVersion.substring(0, ix);
+    if ((ix = fullVersion.indexOf(" ")) != -1)
+      fullVersion = fullVersion.substring(0, ix);
+
+    majorVersion = parseInt('' + fullVersion, 10);
+    if (isNaN(majorVersion)) {
+      fullVersion  = '' + parseFloat(navigator.appVersion);
+      majorVersion = parseInt(navigator.appVersion, 10);
+    }
+
+    if (browserName === 'IE' && majorVersion < 11) {
+      var link = document.createElement('link');
+
+      var appRoot = document.getElementsByTagName('app-root')[0];
+      appRoot.parentNode.removeChild(appRoot);
+
+      link.href = 'assets/nojs-styles.css';
+      link.type = 'text/css';
+      link.rel = 'stylesheet';
+      document.getElementsByTagName('head')[0].appendChild( link );
+      document.getElementById('old-browsers-support').style.display = 'block';
+    }
+</script>
+
+<script src="https://cdn.ckeditor.com/4.5.11/full-all/ckeditor.js"></script>
+
+</body>
+</html>

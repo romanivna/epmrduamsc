@@ -1,0 +1,93 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+i, em {
+  font-style: italic;
+}
+
+blockquote {
+  font-style: italic;
+  font-family: Georgia, Times, "Times New Roman", serif;
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 0;
+  padding: 0 8px 0 20px;
+  margin: 20px 40px;
+  border-left-width: 5px;
+}
+
+.content-box__content ol,
+.event-body__content ol,
+.content-box__content ul,
+.event-body__content ul{
+  margin: 20px 0;
+  padding: 0 0 0 40px;
+}
+
+.content-box__content ol,
+.event-body__content ol{
+  list-style-type: decimal;
+}
+.content-box__content ul,
+.event-body__content ul{
+  list-style-type: disc;
+}
+
+.cke_path{
+  display: none;
+}
+
+.dp-picker-input {
+  width: 100% !important;
+  height: 38px !important;
+}

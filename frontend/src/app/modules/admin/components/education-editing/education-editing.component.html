@@ -1,0 +1,69 @@
+<div class="content-box">
+  <h2 class="content-box__name">{{ education.title }}</h2>
+</div>
+<form [formGroup]="educationForm" novalidate class="education-item" *ngIf="education">
+  <div class="img-wrapper">
+    <div class="education-item__img-box img-box">
+      <div class="img-wrapper__background-block">
+      </div>
+      <div class="img-box__img"
+           *ngIf="education.img.link"
+           [ngStyle]="{'background-image': 'url(' + ( education.img.link ) + ')'}">
+
+      </div>
+      <a class="img-box__uploading"
+         (click)="showAlbums()">
+      <span class="img-box__uploading-text img-wrapper-icon">
+        <i class="fa fa-picture-o" aria-hidden="true">
+          <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+        </i>
+      </span>
+      </a>
+    </div>
+
+    <div class="img-box__local-upload-wrapper content-box">
+      <p class="asterisk"></p>
+      <app-dnd-file-upload class="img-box__local-upload img-wrapper-input"
+                           (fileUploaded)="addImage($event)"
+                           [title]="'Choose image'">
+      </app-dnd-file-upload>
+      <div *ngIf="savePressed" class="content-box__alert">
+        <p *ngIf="!education.img && savePressed">
+          {{ 'validationInvalidRequired' | localizator}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="content-box">
+    <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Description' | localizator }}</h2>
+    <ckeditor formControlName="description" id="description" [config]="ckEditorConfig" required></ckeditor>
+    <div *ngIf="(educationForm.get('description').touched ||  savePressed)" class="content-box__alert">
+      <p *ngIf="!educationForm.controls.description.value">{{ 'validationInvalidRequired' | localizator}}</p>
+    </div>
+  </div>
+
+  <app-error-message *ngIf="errMessage" [message]="errMessage" (onEnding)="errMessage = null"></app-error-message>
+
+  <div class="education-item__tools">
+    <button class="education-item__btn education-item__btn--save"
+            (click)="suggestToSave()">
+      {{ 'Save' | localizator }}
+    </button>
+    <button class="education-item__btn education-item__btn--cancel"
+            (click)="suggestToCancel()">
+      {{ 'Cancel' | localizator }}
+    </button>
+  </div>
+
+</form>
+
+<app-albums-modal-window *ngIf="imgSelection" (onAlbumChosen)="updateImg($event)"></app-albums-modal-window>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+
+
+<app-spinner></app-spinner>

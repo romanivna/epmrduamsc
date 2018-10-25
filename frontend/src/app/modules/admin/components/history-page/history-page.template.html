@@ -1,0 +1,188 @@
+
+  <section  [ngClass]="{'admin-page-hide' : !isAdminPageOpen}"
+    class="tab">
+    <li *ngFor="let item of tabItems"
+        class='tab-item '
+        lang="{{ item.lang }}"
+        (click)="changeLanguage($event)">
+
+      {{ item.name | localizator | uppercase }}
+
+    </li>
+  </section>
+  <section [ngClass]="{'admin-page-hide' : !isAdminPageOpen}"
+    class="history-page">
+
+    <div class="history-page-main">
+
+      <div class="img-wrapper ">
+        <div class="event__img-box history-page-main-img-box">
+          <div class="history-page-main-img">
+          </div>
+          <div
+            class="img-box__img"
+            [ngStyle]="{'background-image': 'url(' + (historyMain.img.link) + ')'}">
+          </div>
+          <div class="img-box__uploading">
+            <a class="img-box__uploading-icon"
+               (click)="showAlbums('main')">
+            <span class="img-wrapper-icon">
+              <i class="fa fa-picture-o" aria-hidden="true">
+                <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+              </i>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="img-box__local-upload-wrapper content-wrapper input-for-history">
+          <div class="content-box">
+            <p class=" content-box__prop-name--custom content-box__prop-name--required"></p>
+            <app-dnd-file-upload class="input-for-history__dnd"
+                                 (fileUploaded)="addImage($event, 'main')"
+                                 [title]="'Choose image'"
+            >
+            </app-dnd-file-upload>
+            <div *ngIf="savePressed" class="content-box__alert">
+              <p *ngIf="!historyMain.img.link && savePressed">
+                {{ 'validationInvalidRequired' | localizator}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-page-main-title">
+            <input
+              class="history-page-main-title__text" value="{{historyMain.header}}"
+              [placeholder]="'Enter the title' | localizator ">
+          </div>
+      <div *ngIf="savePressed" class="content-box__alert">
+        <p *ngIf="historyMain.header === '' && savePressed">
+          {{ 'validationInvalidRequired' | localizator}}
+        </p>
+      </div>
+    </div>
+
+    <div
+      (mousemove)="onDragging($event)"
+    >
+    <div *ngFor="let item of historyItems"
+         (mousedown)="onDragBegin($event)"
+         (mouseup)="onDrop($event)"
+    class="history-page-item">
+      <div class="history-page-droppable-block"
+           *ngIf="isDragging"
+           [attr.data-order]="item.orderNum"
+      (mouseup)="onDragEnd()" ></div>
+      <div  class="history-page-block {{item.position}}"
+            [attr.data-order]="item.orderNum">
+
+
+        <div class="img-wrapper history-page-block-img" >
+          <div class="event__img-box img-box">
+            <div class="img-wrapper__background-block">
+            </div>
+            <div *ngIf="item.img"
+                 class="img-box__img"
+                 [ngStyle]="{'background-image': 'url(' + (item.img.link) + ')'}">
+            </div>
+            <div class="img-box__uploading">
+              <a class="img-box__uploading-icon"
+                 (click)="showAlbums(item.orderNum)"
+                 (mousedown)="stopDrop($event)">
+            <span class="img-wrapper-icon">
+              <i class="fa fa-picture-o" aria-hidden="true">
+                <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+              </i>
+              </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="img-box__local-upload-wrapper content-wrapper">
+            <div class="content-box">
+              <p class="content-box__prop-name--custom content-box__prop-name--required"></p>
+              <app-dnd-file-upload class="img-box__local-upload"
+                                   (fileUploaded)="addImage($event, item.orderNum)"
+                                   [title]="'Choose image'"
+                                   (mousedown)="stopDrop($event)">
+              </app-dnd-file-upload>
+              <div *ngIf="savePressed" class="content-box__alert">
+                <p *ngIf="!item.img && savePressed">
+                  {{ 'validationInvalidRequired' | localizator}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="history-page-block-content">
+          <div class="history-page-block-content__wrapper">
+            <h2 class="history-page-block-content__prop history-page-block-content--required">{{ 'Header' | localizator }}</h2>
+            <div>
+              <input
+                required minlength="4" maxlength="40"
+                (mousedown)="stopDrop($event)"
+                class="history-page-block-content__title history-page-block-content__title-{{item.orderNum}}" value="{{item.header}}"
+                [placeholder]="'Enter the title' | localizator ">
+            </div>
+            <div *ngIf="savePressed" class="content-box__alert">
+              <p *ngIf="historyItems.header === '' && savePressed">
+                {{ 'validationInvalidRequired' | localizator}}
+              </p>
+            </div>
+
+            <h2 class="history-page-block-content__prop history-page-block-content--required ">{{ 'history' | localizator }}</h2>
+            <div>
+              <textarea
+                required maxlength="2000" minlength="20"
+                (mousedown)="stopDrop($event)"
+                class="history-page-block-content__content history-page-block-content__content-{{item.orderNum}}"
+                [placeholder]="'Enter the text' | localizator ">{{item.content}}</textarea>
+              <div *ngIf="savePressed" class="content-box__alert">
+                <p *ngIf="historyItems.content === '' && savePressed">
+                  {{ 'validationInvalidRequired' | localizator}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="history-page-block-content__delete">
+        <a  class="history-page-block-content__btn"
+            (mousedown)="stopDrop($event)"
+            (click)="delete(item.orderNum)"
+            title="{{'delete news' | localizator}}">
+          <i class="fa fa-times history-page-block-content__icon" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="history-page__center">
+      <button class="history-page__btn history-page__btn--save"
+              (click)="addField()">
+        {{ 'Add field' | localizator }}
+      </button>
+    </div>
+
+    <div class="history-page__tools">
+      <button class="history-page__btn history-page__btn--save"
+              (click)="suggestToSave()">
+        {{ 'Save' | localizator }}
+      </button>
+      <button class="history-page__btn history-page__btn--cancel"
+              (click)="suggestToCancel()">
+        {{ 'Cancel' | localizator }}
+      </button>
+    </div>
+    </div>
+</section>
+    <app-albums-modal-window *ngIf="imgSelection" (onAlbumChosen)="updateImg($event)"></app-albums-modal-window>
+
+    <app-confirmation-modal-window [question]="questionForConfirmation | localizator"
+                                   (onVoted)="decideAboutVoting($event)">
+    </app-confirmation-modal-window>
+
+
+  <app-spinner></app-spinner>

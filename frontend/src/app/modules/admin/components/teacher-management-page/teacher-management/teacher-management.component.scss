@@ -1,0 +1,123 @@
+@import '../../../../../shared/styles/variables';
+@import '../../../../../shared/styles/colors';
+
+.head-content {
+  display: flex;
+  position: relative;
+
+  &__select-conteiner {
+    display: block;
+    margin: 15px 0;
+    border: 1px solid $color-gray;
+    width: 90%;
+
+    &:hover {
+      box-shadow: 0 2px 9px 1px $color-gray;
+    }
+
+    @media screen and (max-width: 425px) {
+      width: 85%;
+    }
+
+  }
+
+  &__select {
+    border-color: $color-white;
+    padding: 10px;
+    width: 100%;
+    color: $color-darkgray;
+    font-size: 1.125rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    option {
+      cursor: pointer;
+    }
+  }
+
+  &__btn-add-teacher {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    width: 2.5rem;
+    text-align: center;
+    line-height: 2.5rem;
+    font-size: 1.4rem;
+
+    &:hover {
+      color: $color-red;
+    }
+  }
+}
+
+.teacher-management {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 30px 0;
+
+  &__item {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background: $color-lightgray;
+    padding: 10px;
+    width: 30%;
+    min-width: 250px;
+    height: 350px; 
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__img-wrapper {
+    position: relative;
+    height: 80%;
+    overflow: hidden;
+
+    &-teacher-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  &__header {
+    margin: 10px 0;
+    overflow: hidden;
+    color: $color-red;
+    font-size: 1.35rem;
+    font-weight: bold;
+  }
+
+  &__tools {
+    display: flex;
+    justify-content: space-around;
+    color: $color-darkgray;
+    font-size: 1.5rem;
+
+    &-btn {
+      display: flex;
+      position: relative;
+      align-items: center;
+      height: 2rem;
+
+      &:hover {
+
+        .teacher-management__icon {
+          color: $color-red;
+        }
+      }
+    }
+  }
+
+}

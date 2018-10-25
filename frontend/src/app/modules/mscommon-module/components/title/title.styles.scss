@@ -1,0 +1,62 @@
+@import '../../../../shared/styles/variables';
+@import '../../../../shared/styles/colors';
+
+.title {
+
+  margin: 30px 0 20px;
+  text-align: center;
+  text-transform: uppercase;
+  color: $color-darkgray;
+  font-size: 1.5125rem;
+  font-weight: bold;
+
+  &__question {
+    font-size: 1.25rem;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 0 30px;
+  }
+
+  &__signature {
+    margin: 0 50px;
+    padding-top: 2px;
+    cursor: default;
+  }
+
+  &__button {
+    margin: 0 20px;
+    background: $color-red;
+    padding: 1px 35px;
+    color: $color-white;
+    font-family: 'Oswald light', Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__line {
+    position: relative;
+    top: 15px;
+    flex-grow: 2;
+    border-bottom: 1px solid;
+    height: 0;
+    font-size: 12px;
+
+    &--first {
+      &::after {
+        @include for-line-dots;
+        right: -5px;
+      }
+    }
+
+    &--last {
+      &::before {
+        @include for-line-dots;
+        left: -5px;
+      }
+    }
+  }
+}
+

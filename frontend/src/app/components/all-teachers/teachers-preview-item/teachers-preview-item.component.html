@@ -1,0 +1,16 @@
+<a class="teacher-preview"
+   [ngClass]="{'teacher-preview--head' : (teacher.isHead) }"
+
+   [routerLink]="['/our-teachers/teacher/', teacher.id]">
+  <div class="teacher-preview-photo">
+    <img class="teacher-preview-photo__img" src="{{teacher.photo.link}}" alt="">
+  </div>
+  <div class="teacher-preview-info">
+    <div class="teacher-preview-info__name">{{ teacher.firstName + " " + teacher.lastName }}</div>
+    <div class="teacher-preview-info__position">{{teacher.position}}</div>
+    <div class="teacher-preview-info__slogan"
+         [innerHTML]="teacher.about.length > maxContentLength ? teacher.about.slice(0, maxContentLength) + '...' : teacher.about">
+    </div>
+  </div>
+</a>
+<app-spinner></app-spinner>

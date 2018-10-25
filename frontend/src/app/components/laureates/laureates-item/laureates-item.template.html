@@ -1,0 +1,4 @@
+<div class="laureates-item__img" [ngStyle]="{'background-image': 'url(' + source + ')'}" alt="Laureate"></div>
+<p class="laureates-item__title">{{title}}</p>
+<div class="laureates-item__text" *ngIf="text">{{text}}</div>
+<app-spinner></app-spinner>

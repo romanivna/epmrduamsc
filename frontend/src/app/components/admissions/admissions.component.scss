@@ -1,0 +1,114 @@
+@import '../../shared/styles/colors';
+
+.form {
+  margin-bottom: 70px;
+
+  input {
+    .ng-invalid {
+      border: 1px solid $color-red;
+    }
+  }
+
+  &-container {
+    margin: 30px auto;
+    width: 60%;
+    min-width: 320px;
+    max-width: 450px;
+    font-size: 1.25rem;
+  }
+
+  &-list {
+    margin: 15px 0 50px;
+
+
+
+    &-item {
+      margin: 10px 0 0 15px;
+
+
+      &:before {
+        content: '';
+        display: inline-block;
+        margin-right: 10px;
+        border-radius: 50%;
+        background-color: $color-black;
+        width: 8px;
+        height: 8px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &-title {
+    margin: 0 auto 30px;
+    text-align: center;
+    color: $color-darkgray;
+    font-weight: bold;
+  }
+
+  &__field {
+    &-container {
+      margin: 30px auto;
+    }
+
+    &-novalid {
+      border: 1px solid $color-red;
+    }
+
+    &-required {
+      &::after {
+        content: '*';
+        color: $color-red;
+      }
+    }
+
+    &-title {
+      margin: 10px 0;
+    }
+  }
+
+  &__controls {
+    margin: 50px 0 0;
+    text-align: center;
+  }
+
+
+
+  &__button {
+    display: inline-block;
+    margin: 5px auto;
+    border: 2px solid $color-darkgray;
+    background: $color-darkgray;
+    padding: 0 30px;
+    height: 2rem;
+    text-align: center;
+    line-height: 2rem;
+    color: $color-white;
+    font-size: 1.2rem;
+
+    &:hover {
+      background: none;
+      color: $color-darkgray;
+    }
+  }
+
+
+
+  &-error-title {
+    color: $color-red;
+    font-weight: bold;
+  }
+
+
+
+  &__response {
+    text-align: center;
+
+    &-text {
+      margin-bottom: 35px;
+    }
+  }
+
+}
+
+

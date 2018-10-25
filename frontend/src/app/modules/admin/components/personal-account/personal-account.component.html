@@ -1,0 +1,38 @@
+<app-title [title]="'personal account'"></app-title>
+
+<div class="user-management">
+  <table class="user-management__table">
+    <thead class="users-table-header">
+      <tr class="users-table-row">
+        <th class="users-table-header__item">{{'login' | localizator}}</th>
+        <th class="users-table-header__item">{{'email' | localizator}}</th>
+        <th class="users-table-header__item">{{'phone' | localizator}}</th>
+        <th class="users-table-header__item">{{'role' | localizator}}</th>
+        <th class="users-table-header__item">{{'First Name' | localizator}}</th>
+        <th class="users-table-header__item">{{'Last Name' | localizator}}</th>
+        <th class="users-table-header__item" colspan="2">{{'action' | localizator}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="users-table-row" *ngIf="user" [ngClass]="{'users-table-row__current': user.login === currentUserLogin}">
+        <td class="users-table-row__chunk">{{user.login}}</td>
+        <td class="users-table-row__chunk">{{user.email}}</td>
+        <td class="users-table-row__chunk">{{user.phone}}</td>
+        <td class="users-table-row__chunk">{{user.role}}</td>
+        <td class="users-table-row__chunk">{{user.firstName}}</td>
+        <td class="users-table-row__chunk">{{user.lastName}}</td>
+        <td class="users-table-row__chunk">
+          <span class="action-icon" title="delete user" (click)="deleteUser(user)">
+            <i class="fa fa-times"></i>
+          </span>
+        </td>
+        <td class="users-table-row__chunk">
+          <span class="action-icon" title="edit user" (click)="editUser(user)">
+            <i class="fa fa-pencil"></i>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+    <app-spinner></app-spinner>
+  </table>
+</div>

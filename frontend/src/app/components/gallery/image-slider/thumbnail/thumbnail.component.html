@@ -1,0 +1,20 @@
+<div class="slides">
+  <img class="slides__arrow slides__arrow--left"
+       src="assets/img/gallery_arrow.png"
+       (click)="onPrevThumbnails()"
+       width="30">
+
+  <img class="slides__arrow slides__arrow--right"
+       (click)="onNextThumbnails()"
+       src="assets/img/gallery_arrow.png"
+       width="30">
+
+  <div class="slides__slide-wrapper"
+       *ngFor="let thumbnail of thumbnails">
+    <div class="slides__slide"
+         [ngStyle]="{'background-image': 'url(' + (thumbnail.link) + ')'}"
+         (click)="onSelectImg(thumbnail)"
+         [class.slides__slide--active]="thumbnail === activeThumbnail">
+    </div>
+  </div>
+</div>

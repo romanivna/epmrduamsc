@@ -1,0 +1,30 @@
+<div class="ensemble-preview">
+  <div class="ensemble-preview__img-box">
+    <a [routerLink]="['/ensembles', cuttedEnsembleItem.id ]">
+      <div class="ensemble-preview__img"
+           [ngStyle]="{'background-image': 'url(' + ( ensembleItem.img.link ) + ')'}">
+      </div>
+    </a>
+  </div>
+  <div class="ensemble-preview-text">
+    <div class="ensemble-preview-text__head">
+      <a [routerLink]="['/ensembles', cuttedEnsembleItem.id ]">
+        <p class="ensemble-preview-text__header">{{ensembleItem.name}}</p>
+      </a>
+    </div>
+    <p class="ensemble-preview-text__content" [innerHTML]="ensembleItem.description"></p>
+  </div>
+
+  <div class="ensemble-preview__tools" *ngIf="extended">
+    <a [routerLink]="['/admin/ensembles', ensembleItem.id]"
+       class="ensemble-preview__btn"
+       title="{{'edit ensemble' | localizator}}">
+      <i class="fa fa-pencil ensemble-preview__icon" aria-hidden="true"></i>
+    </a>
+    <a  class="ensemble-preview__btn"
+        (click)="remove()"
+        title="{{'delete ensemble' | localizator}}">
+      <i class="fa fa-times ensemble-preview__icon" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>

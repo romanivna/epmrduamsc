@@ -1,0 +1,85 @@
+@import '../../shared/styles/colors';
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 0;
+  color: $color-darkgray;
+
+  &__section {
+    width: 50%;
+    min-height: 400px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      min-height: 0;
+    }
+  }
+
+  &__item {
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    padding: 15px 0;
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: bold;
+  }
+
+  &__contact {
+    display: flex;
+    margin: 10px 0;
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+
+    &-name {
+      padding-right: 20px;
+      width: 45%;
+      min-width: 150px;
+      max-width: 270px;
+      overflow: hidden;
+      text-align: right;
+      text-transform: uppercase;
+      font-size: 1.25rem;
+    }
+
+    &-value {
+      padding-left: 40px;
+      width: 40%;
+      overflow: hidden;
+    }
+
+    &-phone {
+      display: block;
+      padding-bottom: 10px;
+    }
+
+    @media screen and (max-width: 468px) {
+      flex-direction: column;
+
+      &-name {
+        padding-bottom: 10px;
+        width: 100%;
+        text-align: left;
+      }
+
+      &-value {
+        padding-left: 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.map {
+  &__frame {
+    width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 400px;
+  }
+}

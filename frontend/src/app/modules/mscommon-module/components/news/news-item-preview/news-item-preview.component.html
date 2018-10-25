@@ -1,0 +1,37 @@
+<div class="news-preview">
+  <div class="news-preview__img-box">
+    <a [routerLink]="['/news', cuttedNewsItem.id ]">
+      <div class="news-preview__img"
+          [ngStyle]="{'background-image': 'url(' + ( newsItem.img.link ) + ')'}">
+      </div>
+    </a>
+  </div>
+
+  <div class="news-preview-text">
+    <div class="news-preview-text__head">
+      <a [routerLink]="['/news', cuttedNewsItem.id ]">
+        <p class="news-preview-text__header">{{newsItem.header}}</p>
+      </a>
+      <p class="news-preview-text__date">
+        <app-date-box [date]="newsItem.date"></app-date-box>
+      </p>
+    </div>
+    <p class="news-preview-text__content" [innerHTML]="newsItem.content"></p>
+
+    <hr class="line" *ngIf="!extended">
+  </div>
+
+  <div class="news-preview__tools" *ngIf="extended">
+    <a [routerLink]="['/admin/news', newsItem.id]"
+        class="news-preview__btn"
+        title="{{'edit news' | localizator}}">
+      <i class="fa fa-pencil news-preview__icon" aria-hidden="true"></i>
+    </a>
+    <a  class="news-preview__btn"
+        (click)="remove()"
+        title="{{'delete news' | localizator}}">
+      <i class="fa fa-times news-preview__icon" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>
+<app-spinner></app-spinner>

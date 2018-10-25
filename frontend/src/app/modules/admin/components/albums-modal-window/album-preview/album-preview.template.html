@@ -1,0 +1,9 @@
+<section class="album">
+  <a *ngFor="let source of sources"
+     (click)="suggestToUpdate(source)"
+     class="album__img-wrapper">
+    <div class="album__image"
+      [ngStyle]="{'background-image': 'url(' + (source.link) + ')'}">
+    </div>
+  </a>
+</section>

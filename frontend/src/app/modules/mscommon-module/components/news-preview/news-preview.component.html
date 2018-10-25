@@ -1,0 +1,24 @@
+<div *ngIf="extended" class="btn">
+  <a class="btn__add-news-item"
+     [routerLink]="['/', 'admin', 'news', 'news-creation']"
+     title="{{'add news' | localizator}}">
+    <i class="fa fa-plus btn__icon" aria-hidden="true"></i>
+  </a>
+</div>
+
+<app-news-item-preview
+  *ngFor="let newsItem of news"
+  [newsItem]="newsItem"
+  [extended]="extended"
+  (removedNewsItem)="suggestToRemove($event)">
+</app-news-item-preview>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutRemoving($event)">
+</app-confirmation-modal-window>
+
+<app-show-next-button
+  [hideButton]="allNewsLoaded"
+  (showNext)="onNextNewsItemsClick()">
+</app-show-next-button>
+<app-spinner></app-spinner>

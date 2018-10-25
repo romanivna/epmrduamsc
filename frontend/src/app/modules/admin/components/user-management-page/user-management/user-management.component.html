@@ -1,0 +1,62 @@
+<div class="user-management">
+  <h3 class="user-management__header">
+    {{'user-management' | localizator}}
+  </h3>
+  <div class="user-management__user-creating">
+    <a routerLink="/admin/create-user">
+      <button class="user-creating-button" type="button">
+        {{'add-user' | localizator}}
+      </button>
+    </a>
+  </div>
+  <div class="table-wrapper">
+  <table class="user-management__table">
+    <thead class="users-table-header">
+      <tr class="users-table-row">
+        <th class="users-table-header__item">{{'login' | localizator}}</th>
+        <th class="users-table-header__item">{{'email' | localizator}}</th>
+        <th class="users-table-header__item">{{'phone' | localizator}}</th>
+        <th class="users-table-header__item">{{'role' | localizator}}</th>
+        <th class="users-table-header__item">{{'First Name' | localizator}}</th>
+        <th class="users-table-header__item">{{'Last Name' | localizator}}</th>
+        <th class="users-table-header__item" colspan="2">{{'action' | localizator}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="users-table-row" *ngFor="let user of users" [ngClass]="{'users-table-row__current': user.login === currentUserLogin}">
+        <td class="users-table-row__chunk">{{user.login}}</td>
+        <td class="users-table-row__chunk">{{user.email}}</td>
+        <td class="users-table-row__chunk">{{user.phone}}</td>
+        <td class="users-table-row__chunk">{{user.role}}</td>
+        <td class="users-table-row__chunk">{{user.firstName}}</td>
+        <td class="users-table-row__chunk">{{user.lastName}}</td>
+        <td class="users-table-row__chunk">
+          <span class="action-icon" title="delete user" (click)="deleteUser(user)">
+            <i class="fa fa-times"></i>
+          </span>
+        </td>
+        <td class="users-table-row__chunk">
+          <span class="action-icon edit-icon" title="edit user" (click)="editUser(user)">
+            <i class="fa fa-pencil"></i>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+    <app-spinner></app-spinner>
+  </table>
+</div>
+</div>
+
+<app-error-message *ngIf="error" [timeout]="errorTimeout"
+                                 [message]="error"
+                                 (onEnding)="handleError($event)">
+</app-error-message>
+
+<app-show-next-button
+  [hideButton]="!canLoadMore"
+  (showNext)="loadMore()">
+</app-show-next-button>
+
+<app-confirmation-modal-window [showButton]="true" [question]="confirmQuestion"  (onVoted)="voteForDeleting($event)">
+</app-confirmation-modal-window>
+<app-spinner></app-spinner>

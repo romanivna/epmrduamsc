@@ -1,0 +1,54 @@
+@import '../colors';
+@import '../variables';
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+  }
+
+  &-article {
+    margin: 10px 0;
+    width: $content-article-width-large;
+
+    &:nth-child(4n) {
+      @media (min-width: 768px) {
+        margin-right: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      margin-right: $content-article-desktop-margin-right;
+    }
+
+    @media (max-width: 1200px) {
+      margin-right: 10px;
+      width: $content-article-width-medium;
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
+    }
+  }
+}
+
+.required {
+  border: 2px solid $color-red;
+  box-shadow: 0 0 3px $color-red;
+}
+
+.required-star {
+  &::after {
+    content: '*';
+    margin-left: 7px;
+    color: $color-red;
+  }
+}
+
+.hidden {
+  display: none;
+}

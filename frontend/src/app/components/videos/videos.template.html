@@ -1,0 +1,32 @@
+<app-title [title]="'video'"></app-title>
+<div class='videos'>
+  <div class='videos__last-video' *ngIf="videoList.length>0">
+    <div class='videos__last-video-img-wrapper' (click)='selectVideo(videoList[0])'>
+      <img [src]="videoList[0].thumbnails.default.url" class="videos__last-video-img">
+    </div>
+    <div class="videos__last-video-aside">
+      <h3 class="videos__last-video-title"> {{ videoList[0].title }} </h3>
+      <p class="videos__last-video-description"> {{ videoList[0].description }} </p>
+    </div>
+  </div>
+
+  <ul class='videos__videos-list'>
+    <li class='videos__videos-list-item' *ngFor="let video of videoList | slice:1; let i = index" (click)='selectVideo(video)'>
+      <img class='videos__videos-list-item-image' [src]="video.thumbnails.default.url">
+      <p class='videos__videos-list-item-about'></p> {{ video.title }}
+    </li>
+  </ul>
+</div>
+
+<app-modal-window *ngIf="showModal" (close)="showModal=false">
+  <div class="modal">
+    <iframe [src]="currentVideo"
+      allowfullscreen="allowfullscreen"
+      mozallowfullscreen="mozallowfullscreen"
+      msallowfullscreen="msallowfullscreen"
+      oallowfullscreen="oallowfullscreen"
+      webkitallowfullscreen="webkitallowfullscreen"></iframe>
+
+  </div>
+</app-modal-window>
+<app-spinner></app-spinner>

@@ -1,0 +1,17 @@
+<app-title [title]="'admission rules'"></app-title>
+<div class="admission-rules">
+  <article class="admission-rules__section">
+    <div class="admission-rules__header">
+      <h3 class="admission-rules__header-text" *ngIf="admissionItem"> {{admissionItem.header}} </h3>
+    </div>
+    <hr>
+    <div class="admission-rules__content" [innerHTML]="admissionItem.content | safeHtml">
+    </div>
+    <div class="admission-rules__requirements">
+      <img src="../../../assets/img/pdf_preview.png" class="admission-rules__requirements-pdf-preview" alt="pdf preview">
+      <p class="admission-rules__requirements-download" (click)="downloadAdmissionRules()">
+        {{'download' | localizator}}</p>
+    </div>
+  </article>
+</div>
+<app-spinner></app-spinner>

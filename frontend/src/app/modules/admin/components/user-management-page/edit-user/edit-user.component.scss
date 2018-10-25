@@ -1,0 +1,74 @@
+@import '../../../../../shared/styles/colors';
+@import '../../../../../shared/styles/variables';
+
+.edit-user-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 400px;
+
+  &__header {
+    margin-bottom: 20px;
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  &__input {
+    padding: 10px 70px 10px 10px;
+  }
+
+  &__input--select {
+    padding: 10px 90px 10px 10px;
+  }
+
+  &__tools {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.25rem 0;
+    width: 100%;
+  }
+
+  &__button {
+    width: 60%;
+    max-width: 200px;
+    height: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 2rem;
+    color: $color-darkgray;
+    font-family: $text-font-family;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    &--submit {
+      margin-right: 30px;
+      background-color: $color-gray;
+
+      &:hover {
+        background-color: $color-black-transparent-bg;
+
+      }
+
+      &[disabled] {
+        background-color: $color-lightgray;
+        cursor: not-allowed;
+      }
+    }
+
+    &--cancel {
+      background-color: $color-065red;
+
+      &:hover {
+        background-color: $color-red;
+      }
+    }
+  }
+}

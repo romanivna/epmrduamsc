@@ -1,0 +1,189 @@
+<form novalidate [formGroup]="eventForm" class="event" *ngIf="event && galleryClose">
+  <div class="img-wrapper">
+  <div class="event__img-box img-box">
+    <div class="img-wrapper__background-block">
+    </div>
+    <div *ngIf="event.img"
+      class="img-box__img"
+      [ngStyle]="{'background-image': 'url(' + (event.img.link) + ')'}">
+    </div>
+    <div class="img-box__uploading">
+      <a class="img-box__uploading-icon"
+         (click)="showAlbums()">
+      <span class="img-wrapper-icon">
+        <i class="fa fa-picture-o" aria-hidden="true">
+          <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+        </i>
+        </span>
+      </a>
+     </div>
+  </div>
+
+  <div class="img-box__local-upload-wrapper content-wrapper">
+    <div class="content-box">
+        <p class=" content-box__prop-name--custom content-box__prop-name--required"></p>
+        <app-dnd-file-upload class="img-box__local-upload"
+        (fileUploaded)="addImage($event)"
+        [title]="'Choose image'">
+        </app-dnd-file-upload>
+        <div *ngIf="savePressed" class="content-box__alert">
+          <p *ngIf="!event.img.link && savePressed">
+            {{ 'validationInvalidRequired' | localizator}}
+          </p>
+        </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="content-box">
+      <p class="content-box__prop-name content-box__prop-name--required">{{ 'Create event' | localizator }}:</p>
+      <div class="content-box__langs">
+        <label class="content-box__lang">
+          <input type="checkbox"  id="isUkrainian" formControlName="isUkrainian" >
+          {{ 'In Ukrainian' | localizator }}
+        </label>
+        <label class="content-box__lang">
+          <input type="checkbox" id="isRussian" formControlName="isRussian">
+          {{ 'In Russian' | localizator }}
+        </label>
+        <label class="content-box__lang">
+          <input type="checkbox" id="isEnglish" formControlName="isEnglish">
+          {{ 'In English' | localizator }}
+        </label>
+        <div class="content-box__alert">
+          <div *ngIf="(savePressed || eventForm.get('isUkrainian').touched ||
+                                      eventForm.get('isRussian').touched ||
+                                      eventForm.get('isEnglish').touched )">
+            <p *ngIf="!eventForm.get('isUkrainian').value &&
+                        !eventForm.get('isRussian').value  &&
+                        !eventForm.get('isEnglish').value">
+              {{ 'validationInvalidRequired' | localizator}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-box">
+      <div class="content-box">
+          <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Start Time' | localizator }}</h2>
+          <dp-date-picker
+            [(ngModel)]="dateFrom"
+            formControlName="dateFrom"
+            id="dateFrom"
+            [mode]="'daytime'"
+            [config]="datePickerConfig"
+            [maxDate]="maxDate"
+            [minDate]="minDate"
+            theme = "dp-material" mode = "day"
+            placeholder="DD.MM.YYYY HH:mm">
+          </dp-date-picker>
+          <div class="content-box__alert">
+              <p *ngIf="(eventForm.get('dateFrom').touched || savePressed) && eventForm.get('dateFrom').hasError('required')">{{ "validationInvalidRequired" | localizator}}</p>
+              <p *ngIf="eventForm.get('dateFrom').hasError('format')">
+                {{ 'validationInvalidFormat' | localizator}} {{dateFormat}}
+              </p>
+              <p *ngIf="isEventFromPast()">{{ "eventFromThePastWarning" | localizator}}</p>
+          </div>
+      </div>
+      <div class="content-box">
+          <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'End Time' | localizator }}</h2>
+          <dp-date-picker
+            [(ngModel)]="dateTo"
+            formControlName="dateTo"
+            id="dateTo"
+            [mode]="'daytime'"
+            [config]="datePickerConfig"
+            [maxDate]="maxDate"
+            [minDate]="minDate"
+            theme = "dp-material" mode = "day"
+            placeholder="DD.MM.YYYY HH:mm">
+          </dp-date-picker>
+          <div class="content-box__alert">
+            <p *ngIf="(eventForm.get('dateTo').touched || savePressed) && eventForm.get('dateTo').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+            <p *ngIf="eventForm.get('dateTo').hasError('format')">
+              {{ 'validationInvalidFormat' | localizator}} {{dateFormat}}
+            </p>
+            <p *ngIf="isEndBeforeStart()">{{ "endBeforeStartTimeWarning" | localizator}}</p>
+          </div>
+      </div>
+    </div>
+    <div class="content-box">
+      <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Header' | localizator }}</h2>
+      <input class="content-box__header" id="header" formControlName="header" maxlength="50" minlength="2"  [placeholder]="'Enter the title' | localizator ">
+      <div class="content-box__alert">
+        <div *ngIf="(eventForm.get('header').touched ||  savePressed)">
+          <p *ngIf="eventForm.get('header').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+        </div>
+        <div>
+          <p *ngIf="eventForm.get('header').hasError('minlength')">{{'validationInvalidLengthMin' | localizator}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="content-box">
+      <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Title (short review of event)' | localizator }}</h2>
+      <input class="content-box__header" id="title" formControlName="title" maxlength="50" minlength="2" [placeholder]="'Enter the title' | localizator ">
+      <div class="content-box__alert">
+          <div *ngIf="(eventForm.get('title').touched ||  savePressed)">
+            <p *ngIf="eventForm.get('title').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+          </div>
+          <div>
+            <p *ngIf="eventForm.get('title').hasError('minlength')">{{ 'validationInvalidLengthMin' | localizator}}</p>
+          </div>
+      </div>
+    </div>
+    <div class="content-box">
+      <h2 class="content-box__prop-name">{{ 'Place Name' | localizator }}</h2>
+      <input class="content-box__header" id="placeName" formControlName="placeName" maxlength="80" minlength="2"  [placeholder]="'Enter the text' | localizator ">
+      <div class="content-box__alert">
+          <p *ngIf="eventForm.get('placeName').hasError('minlength')">{{ 'validationInvalidLengthMin' | localizator}}</p>
+       </div>
+    </div>
+    <div class="content-box">
+      <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Address' | localizator }}</h2>
+      <input class="content-box__header" id="placeAddress" formControlName="placeAddress" maxlength="50" minlength="2"  [placeholder]="'Enter the text' | localizator ">
+      <div class="content-box__alert">
+          <div *ngIf="(eventForm.get('placeAddress').touched ||  savePressed)">
+            <p *ngIf="eventForm.get('placeAddress').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+          </div>
+          <div>
+            <p *ngIf="eventForm.get('placeAddress').hasError('minlength')">{{ 'validationInvalidLengthMin' | localizator}}</p>
+          </div>
+      </div>
+    </div>
+    <div class="content-box">
+      <h2 class="content-box__prop-name">{{ 'Google Maps Link' | localizator }}</h2>
+      <input class="content-box__header" id="placeLink" formControlName="placeLink"  [placeholder]="'Enter the text' | localizator ">
+    </div>
+
+    <div class="content-box">
+      <p class=" content-box__prop-name--custom content-box__prop-name--required"></p>
+      <ckeditor #editor id="content" formControlName="content" [config]="ckEditorConfig"></ckeditor>
+      <div *ngIf="(eventForm.get('content').touched ||  savePressed)" class="content-box__alert">
+        <p *ngIf="!eventForm.controls.content.value">{{ 'validationInvalidRequired' | localizator}}</p>
+      </div>
+    </div>
+  </div>
+
+  <app-error-message *ngIf="errMessage" [message]="errMessage" (onEnding)="errMessage = null"></app-error-message>
+
+  <div class="event__tools">
+    <button class="event__btn event__btn--save"
+       (click)="suggestToSave()">
+      {{ 'Save' | localizator }}
+  </button>
+    <button class="event__btn event__btn--cancel"
+        (click)="suggestToCancel()">
+      {{ 'Cancel' | localizator }}
+    </button>
+  </div>
+
+</form>
+
+<app-albums-modal-window *ngIf="imgSelection" (onAlbumChosen)="updateImg($event)"></app-albums-modal-window>
+
+<app-confirmation-modal-window [question]="questionForConfirmation | localizator"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+
+<app-spinner></app-spinner>

@@ -1,0 +1,18 @@
+<div class="image-slider"
+     *ngIf="sources">
+  <div class="image-slider__selected-image-wrapper"
+       (mouseenter)="showAlbumName = true"
+       (mouseleave)="showAlbumName = false">
+    <div class="image-slider__selected-image"
+      [ngStyle]="{'background-image': 'url(' + ( selectedImg.link ) + ')'}">
+    </div>
+    <div class="image-slider__album-name"
+         *ngIf="showAlbumName">
+      {{albumName}}
+    </div>
+  </div>
+
+  <app-thumbnail [activeAlbumImgSources]="sources"
+                 (selectImg)="onSelectImg($event)">
+  </app-thumbnail>
+</div>

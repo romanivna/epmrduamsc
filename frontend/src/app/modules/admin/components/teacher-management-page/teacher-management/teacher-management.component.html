@@ -1,0 +1,65 @@
+<section class="head-content">
+    <label for="departments-list" class="head-content__select-conteiner">
+      <select class="head-content__select" name="departments-list" *ngIf="departments"
+              [(ngModel)]="currentDepartment" (change)="currentDepartmentSelected()">
+
+        <option [ngValue]="'all'" [selected]="ifAllTeachers">
+          {{ 'All Teachers' | localizator}}
+        </option>
+        <option [ngValue]="'noDep'" [selected]="noDep">
+          {{ 'Without department' | localizator }}
+        </option>
+        <option *ngFor="let department of departments"
+                [ngValue]="department"
+                [selected]="!ifAllTeachers && !noDep && department.id === currentDepartment.id">
+                {{ department.name }}
+        </option>
+      </select>
+    </label>
+    <a class="head-content__btn-add-teacher"
+       [routerLink]="['/admin', 'teachers-management', 'teacher-creation']"
+       title="{{ 'add teacher' | localizator }}">
+      <i class="fa fa-plus btn__icon" ></i>
+    </a>
+</section>
+<section class="teacher-management">
+  <a *ngFor="let teacher of teachers"
+     class="teacher-management__item"
+     [routerLink]="['/our-teachers/teacher', teacher.id ]">
+
+    <div class="teacher-management__img-wrapper">
+      <img class="teacher-management__img-wrapper-teacher-img"
+          src="{{ teacher.photo.link }}"
+          alt="{{ teacher.name }}"
+      />
+    </div>
+
+    <h3 class="teacher-management__header">{{teacher.firstName + ' ' + teacher.lastName}}</h3>
+
+    <div class="teacher-management__tools">
+      <a [routerLink]="['/admin', 'teachers-management', teacher.id]"
+         class="teacher-management__tools-btn"
+         title="{{'edit teachers' | localizator}}">
+        <i class="fa fa-pencil teacher-management__icon" aria-hidden="true"></i>
+      </a>
+      <a  class="teacher-management__tools-btn"
+          (click)="deleteTeacher($event, teacher)"
+          title="{{'delete teacher' | localizator}}">
+        <i class="fa fa-times teacher-management__icon" aria-hidden="true"></i>
+      </a>
+    </div>
+  </a>
+</section>
+
+<app-show-next-button
+  [hideButton]="allTeachersLoaded"
+  (showNext)="onNextTeachersItemsClick()">
+</app-show-next-button>
+
+<app-confirmation-modal-window
+  [question]="confirmQuestion"
+  (onVoted)="voteForDeleting($event)">
+</app-confirmation-modal-window>
+
+<router-outlet></router-outlet>
+<app-spinner></app-spinner>

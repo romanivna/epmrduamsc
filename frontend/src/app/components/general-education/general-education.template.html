@@ -1,0 +1,26 @@
+<app-title [title]="'compulsory education'"></app-title>
+<div class="education-item">
+  <div *ngIf="education[0]" class="img-box">
+    <img class="img-box__img"
+         *ngIf = "education[0].img"
+         (click)="showModalWindow = true"
+         [src]="education[0].img.link"
+         alt="{{education[0].title}}">
+  </div>
+  <div  class="content-box__content" [innerHTML]="education[0]?.description | safeHtml"></div>
+</div>
+
+<a class="departments-navigation departments-navigation__arrow-right"
+   [routerLink]="['/departments']" fragment="compulsory-departments">
+  {{ 'compulsory departments' | localizator | uppercase}}
+</a>
+
+<app-modal-window *ngIf="showModalWindow"
+                  (close)="showModalWindow = false">
+  <div class="img-box img-box--modal">
+    <img class="img-modal"
+         [src]="education[0].img.link"
+         alt="{{education[0].img.title}}">
+  </div>
+</app-modal-window>
+<app-spinner></app-spinner>

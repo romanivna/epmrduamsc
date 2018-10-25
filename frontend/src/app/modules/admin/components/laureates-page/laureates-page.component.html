@@ -1,0 +1,45 @@
+<section class="head-content">
+  <a class="head-content__btn-add-laureates"
+     [routerLink]="['/admin', 'laureates-management', 'laureates-creation']"
+     title="{{ 'add laureates' | localizator }}">
+    <i class="fa fa-plus btn__icon" ></i>
+  </a>
+</section>
+<section class="laureates-management">
+  <div *ngFor="let laureate of laureates"
+       class="laureates-management__item">
+    <!--
+         [routerLink]="['/admin', 'laureates', laureate.id]"-->
+    <a class="laureates-management__img-wrapper">
+      <img class="laureates-management__img-wrapper-laureates-img"
+           src="{{ laureate.img?.link || 'http://res.cloudinary.com/music-school-dev/image/upload/v1529930983/serviceImages/Icon_man.png'}}"
+           alt="{{ laureate.name }}"
+      />
+    </a>
+
+    <h3 class="laureates-management__title">{{ laureate.name }}</h3>
+    <h5 class="laureates-management__text">{{ laureate.about }}</h5>
+
+    <div class="laureates-management__tools">
+      <a [routerLink]="['/admin', 'laureates-management', laureate.id]"
+         class="laureates-management__tools-btn"
+         title="{{'edit laureate' | localizator}}">
+        <i class="fa fa-pencil laureates-management__icon" aria-hidden="true"></i>
+      </a>
+      <a  class="laureates-management__tools-btn"
+          (click)="deleteAlumni(laureate.id)"
+          title="{{'delete laureats' | localizator}}">
+        <i class="fa fa-times laureates-management__icon" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<app-show-next-button *ngIf="!allItemsLoaded" (click)="onNextAlumniItemsClick()"></app-show-next-button>
+
+<app-confirmation-modal-window
+  [question]="confirmQuestion"
+  (onVoted)="voteForDeleting($event)">
+</app-confirmation-modal-window>
+
+<router-outlet></router-outlet>

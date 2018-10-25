@@ -1,0 +1,97 @@
+@import '../../../../shared/styles/variables';
+@import '../../../../shared/styles/colors';
+
+.head-content {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  margin: 1rem 0;
+  height: 2.5rem;
+
+  &__btn-add-laureates {
+    position: absolute;
+    right: 0;
+    width: 2.5rem;
+    text-align: center;
+    line-height: 2.5rem;
+    font-size: 1.4rem;
+
+    &:hover {
+      color: $color-red;
+    }
+  }
+}
+
+.laureates-management {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  &__item {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background: $color-lightgray;
+    padding: 10px;
+    width: 33%;
+    min-width: 300px;
+    height: 380px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__img-wrapper {
+    position: relative;
+    height: 75%;
+    overflow: hidden;
+
+    &-laureates-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    margin: 10px 0;
+    overflow: hidden;
+    color: $color-red;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  &__text {
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__tools {
+    display: flex;
+    justify-content: space-around;
+    color: $color-darkgray;
+    font-size: 1.5rem;
+
+    &-btn {
+      display: flex;
+      position: relative;
+      align-items: center;
+      height: 2rem;
+
+      &:hover {
+
+        .laureates-management__icon {
+          color: $color-red;
+        }
+      }
+    }
+  }
+
+}

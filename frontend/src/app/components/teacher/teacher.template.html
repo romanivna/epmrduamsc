@@ -1,0 +1,77 @@
+<div *ngIf="cachedTeachers.length !== 0" class="teacher-wrapper">
+  <div class="arrow arrow--left">
+    <a (click)="getPreviousTeacher()" title="{{ getPreviousTeacherName() }}"
+       [ngClass]="{'arrow-deactive' : !previousTeacher}">
+      <i class="fa fa-angle-left arrow__icon" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div *ngIf="teacher" class="teacher">
+    <app-title [title]="name"></app-title>
+    <div class="teacher__intro">
+      <div class="teacher__photo-wrapper">
+        <img [src]="teacher.photo.link"
+             alt="{{ name }}"
+             class="teacher__photo"
+             (click)="onImageClick($event)">
+      </div>
+      <div class="teacher__personal-info personal-info">
+        <div class="personal-info__item">
+          <span class="personal-info__category"
+          *ngIf="teacher.department.length > 0; else nodeps">
+            {{ 'Department' | localizator }}
+          </span>
+          <ng-template #nodeps>
+             <span class="personal-info__category-no">
+               {{ 'teacher with no department' | localizator }}
+             </span>
+          </ng-template>
+          <a class="personal-info__value"
+             *ngFor="let department of teacher.department"
+             [routerLink]="['/departments', (department.id | routeNormalizer)]">
+            {{ department.name }}
+          </a>
+        </div>
+        <div *ngIf="teacher.position" class="personal-info__item">
+          <span class="personal-info__category">Position: </span>
+          <p class="personal-info__value">{{ teacher.position }}</p>
+        </div>
+        <div *ngIf="teacher.regalias" class="personal-info__item">
+          <span class="personal-info__category">Regalias: </span>
+          <div class="personal-info__value">
+            <p *ngFor="let regalia of teacher.regalias"> {{ regalia }} </p>
+          </div>
+        </div>
+        <div *ngIf="teacher.slogan" class="personal-info__item">
+          <span class="personal-info__category">Slogan: </span>
+          <p class="personal-info__value">{{ teacher.slogan }}</p>
+        </div>
+        <div *ngIf="teacher.mail" class="personal-info__item">
+          <span class="personal-info__category">Mail address: </span>
+          <a class="personal-info__value" href="mailto:{{ teacher.mail }}">{{ teacher.mail }}</a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="teacher.about" class="teacher__about">
+      <h2 class="teacher__about-title">{{ 'about teacher' | localizator | uppercase}}</h2>
+      <div [innerHTML]=" teacher.about | safeHtml"></div>
+    </div>
+  </div>
+  <div class="arrow arrow--right">
+    <a (click)="getNextTeacher()" title="{{ getNextTeacherName() }}"
+       [ngClass]="{'arrow-deactive' : !nextTeacher}">
+      <i class="fa fa-angle-right arrow__icon" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div *ngIf="teacher && teacher.imgs" class="images">
+    <div *ngFor="let img of teacher.imgs"
+         class="images__img img">
+      <img class="img__photo" [src]="img.link" alt="{{ teacher.name }}" (click)="onImageClick($event)">
+    </div>
+  </div>
+</div>
+<app-modal-window *ngIf="selectedImg" (close)="selectedImg = null;">
+  <img class="img-modal" [src]="selectedImg" [alt]="teacher.name">
+</app-modal-window>
+
+
+<app-spinner></app-spinner>

@@ -1,0 +1,102 @@
+<form [formGroup]="departmentForm" novalidate class="departments-item" *ngIf="department">
+  <div class="departments-item__wrapper">
+    <div class="img-wrapper">
+      <div class="departments-item__img-box img-box">
+        <div class="img-wrapper__background-block">
+        </div>
+        <div class="img-box__img"
+             *ngIf="department.img"
+             [ngStyle]="{'background-image': 'url(' + ( department.img.link ) + ')'}">
+
+        </div>
+        <a class="img-box__uploading"
+           (click)="showAlbums()">
+        <span class="img-box__uploading-text img-wrapper-icon">
+          <i class="fa fa-picture-o" aria-hidden="true">
+            <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+          </i>
+        </span>
+        </a>
+      </div>
+
+      <div class="img-box__local-upload-wrapper content-box">
+        <p class="asterisk"></p>
+        <app-dnd-file-upload class="img-box__local-upload img-wrapper-input"
+                             (fileUploaded)="addImage($event)"
+                             [title]="'Choose image'">
+        </app-dnd-file-upload>
+        <div *ngIf="savePressed" class="content-box__alert">
+          <p *ngIf="!department.img.link && savePressed">
+            {{ 'validationInvalidRequired' | localizator}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="departments-item__name-wrapper">
+      <div class="content-box">
+        <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Education type' | localizator }}</h2>
+        <div class="content-box__education">
+          <select class="content-box__select" id="educationType" formControlName="educationType" required>
+            <option *ngFor="let education of educations" [value]="education.educationTypeId" class="content-box__select-option">{{education.title}}</option>
+          </select>
+        </div>
+        <div class="content-box__alert">
+          <div *ngIf="(departmentForm.get('educationType').touched ||  savePressed)">
+            <p *ngIf="departmentForm.get('educationType').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-box">
+        <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Title' | localizator }}</h2>
+        <input class="content-box__header" id="title" formControlName="title" maxlength="50" minlength="2" required placeholder="{{'Enter the text'| localizator}}">
+        <div class="content-box__alert">
+          <div *ngIf="(departmentForm.get('title').touched ||  savePressed)">
+            <p *ngIf="departmentForm.get('title').hasError('required')">{{ 'validationInvalidRequired' | localizator}}</p>
+          </div>
+          <div>
+            <p *ngIf="departmentForm.get('title').hasError('minlength')">{{ 'validationInvalidLengthMin' | localizator}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-box">
+        <h2 class="content-box__prop-name">{{ 'Head' | localizator }}</h2>
+        <select class="content-box__select" id="head" formControlName="head">
+          <option [value]="null" class="content-box__select-option content-box__select-option--disabled">{{'Not chosen' | localizator}}</option>
+          <option *ngFor="let teacher of teachers" [value]="teacher.id"  class="content-box__select-option">{{teacher.firstName}} {{teacher.lastName}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="content-box">
+    <h2 class="content-box__prop-name content-box__prop-name--required">{{ 'Description' | localizator }}</h2>
+    <ckeditor formControlName="description" id="description" [config]="ckEditorConfig" required></ckeditor>
+    <div *ngIf="(departmentForm.get('description').touched ||  savePressed)" class="content-box__alert">
+      <p *ngIf="!departmentForm.controls.description.value">{{ 'validationInvalidRequired' | localizator}}</p>
+    </div>
+  </div>
+
+  <app-error-message *ngIf="errMessage" [message]="errMessage" (onEnding)="errMessage = null"></app-error-message>
+
+  <div class="departments-item__tools">
+    <button class="departments-item__btn departments-item__btn--save"
+            (click)="suggestToSave()">
+      {{ 'Save' | localizator }}
+    </button>
+    <button class="departments-item__btn departments-item__btn--cancel"
+            (click)="suggestToCancel()">
+      {{ 'Cancel' | localizator }}
+    </button>
+  </div>
+
+</form>
+
+<app-albums-modal-window *ngIf="imgSelection" (onAlbumChosen)="updateImg($event)"></app-albums-modal-window>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+
+<app-spinner></app-spinner>

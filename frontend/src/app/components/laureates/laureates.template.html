@@ -1,0 +1,25 @@
+<app-title [title]="'laureates'"></app-title>
+<div class="content">
+  <app-laureates-item *ngFor="let item of laureates"
+                   class="content-article laureate-item"
+                   [source]="item.img?.link || 'http://res.cloudinary.com/music-school-dev/image/upload/v1529930983/serviceImages/Icon_man.png'"
+                   [title]="item.name"
+                   (click)="activeItem=item; showModal=true">
+  </app-laureates-item>
+</div>
+<app-show-next-button *ngIf="!allItemsLoaded" (click)="onNextLaureateItemsClick()"></app-show-next-button>
+<app-modal-window *ngIf="showModal" (close)="showModal=false">
+  <div class="modal">
+    <img class="modal-image"
+         [src]="activeItem.img?.link || 'http://res.cloudinary.com/music-school-dev/image/upload/v1529930983/serviceImages/Icon_man.png'"
+         alt="activePhoto">
+    <h2 class="modal-title">{{ activeItem.name }}</h2>
+    <p class="modal-subtitle">{{ 'Department' | localizator }}: {{ activeItem.department.name}}</p>
+    <p class="modal-subtitle">{{ 'Teacher' | localizator }}: {{ activeItem.teacher }}</p>
+    <p class="modal-subtitle__center">{{ 'Competitions' | localizator }}:</p>
+
+    <ul class="modal-text">
+      <li class="modal-text-item" *ngFor="let item of activeItem.competitions">{{item.title}}</li>
+    </ul>
+  </div>
+</app-modal-window>

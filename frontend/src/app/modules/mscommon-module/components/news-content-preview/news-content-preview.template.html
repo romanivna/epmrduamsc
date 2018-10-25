@@ -1,0 +1,26 @@
+<section class="content news-content-preview">
+  <a class="content-article content-article--news news-content-preview__item"
+    [routerLink]="['/news', item.id]"
+    *ngFor="let item of latestNews | async"
+  >
+    <div class="news-content-preview__image"
+      [ngStyle]="{'background-image': 'url(' + ( item.img.link ) + ')'}"
+    >
+    </div>
+    <p class="news-content-preview__caption">
+      <span class="news-content-preview__title"
+        [attr.title]="item.header"
+      >
+        {{item.header}}
+      </span>
+      <span class="news-content-preview__date">
+        {{item.date | date:"d MMM, yy"}}
+      </span>
+    </p>
+  </a>
+</section>
+<a class="news-content-preview__btn"
+   routerLink="/news">
+  {{'see more upcoming news' | localizator}}
+</a>
+<app-spinner></app-spinner>

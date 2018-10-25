@@ -1,0 +1,21 @@
+<div class="confirmation-wrapper" *ngIf="question">
+  <div class="confirmation">
+    <p class="confirmation__question">{{ question.text | localizator }}{{ question.itemHeader }}{{ question.itemName | localizator }}</p>
+    <div *ngIf="showButton;else otherContent" class="confirmation__variants">
+      <a class="confirmation__variant confirmation__variant--agree"
+        (click)="onAgree()">
+        {{ 'Yes' | localizator }}
+      </a>
+      <a class="confirmation__variant confirmation__variant--disagree"
+        (click)="onDisagree()">
+        {{ 'No' | localizator }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<ng-template #otherContent>
+  <div class="confirmation__variants">
+    <a class="confirmation__variant confirmation__variant--agree" (click)="onAgree()">{{ 'OK' | localizator }}</a>
+  </div>
+</ng-template>

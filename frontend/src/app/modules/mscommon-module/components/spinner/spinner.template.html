@@ -1,0 +1,5 @@
+<div *ngIf="showSpinner" class="spinner">
+  <div *ngFor="let number of 12 | ngForNumber"
+       ngClass="circle circle{{number}}">
+  </div>
+</div>

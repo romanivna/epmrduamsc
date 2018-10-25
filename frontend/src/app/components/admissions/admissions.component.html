@@ -1,0 +1,209 @@
+<div class="form-container" [ngSwitch]="step">
+  <div *ngSwitchCase="0">
+    <h3 class="form-title">{{('STUDENT INFORMATION') | localizator}}</h3>
+    <form (ngSubmit)="save()" [formGroup]="gradeFormGroup" class="form">
+      <div class="form__field-title">{{'Please, choose a grade and proceed to the next step.' | localizator}}</div>
+      <div class="form__field-title"><span class="form__field-required"></span> {{'- Attention, fields marked with asterisks are mandatory.' | localizator}}</div>
+      <div *ngFor="let field of applicantsGradeForm; let i = index;" class="form__field-container">
+        <app-select-field
+          *ngIf="field.type === 'select'"
+          [id]="i"
+          [field]="field"
+          [form]="gradeFormGroup"
+        >
+        </app-select-field>
+      </div>
+      <div class="form__controls">
+        <button tabindex="2" class="form__button form__button_next" type="button" (click)="nextForm(applicantsFormGroup)">{{'Next' | localizator}}</button>
+      </div>
+    </form>
+  </div>
+  <div *ngSwitchCase="1">
+    <h3 class="form-title">{{'STUDENT INFORMATION' | localizator}}</h3>
+    <div class="form__field-title">{{'Please, enter your personal information and proceed to the next step.' | localizator}}</div>
+    <div class="form__field-title"><span class="form__field-required"></span> {{'- Attention, fields marked with asterisks are mandatory.' | localizator}}</div>
+    <form (ngSubmit)="save()" [formGroup]="applicantsFormGroup" class="form">
+      <div *ngFor="let field of applicantsFormFields; let i = index;" class="form__field-container">
+        <app-text-field
+          *ngIf="(field.type === 'tel' || field.type === 'text' || field.type === 'email')"
+          [id]="i"
+          [field]="field"
+          [form]="applicantsFormGroup"
+        >
+        </app-text-field>
+        <app-text-group-field
+          *ngIf="field.type === 'text-group'"
+          [name]="field.name"
+          [fields]="field.fields"
+          [form]="applicantsFormGroup.controls[field.ctrlName]"
+          [id] = "i"
+        >
+        </app-text-group-field>
+        <app-select-field
+          *ngIf="field.type === 'select'"
+          [id]="field.options[i].id"
+          [field]="field"
+          [form]="applicantsFormGroup"
+        >
+        </app-select-field>
+        <app-date-field
+          *ngIf="field.type === 'date'"
+          [id]="i"
+          [field]="field"
+          [form]="applicantsFormGroup"
+          [minDateLimit]=-80
+          [maxDateLimit]=-3
+        >
+        </app-date-field>
+        <app-radio-group-field
+          *ngIf="field.type === 'radio-group'"
+          [id]="i"
+          [name]="field?.name"
+          [radios]="field?.radios"
+          [form]="applicantsFormGroup"
+        >
+        </app-radio-group-field>
+      </div>
+      <div class="form-list">
+        {{'Dear applicants, please attach the following documents below:' | localizator}}
+        <ul>
+          <li class="form-list-item">{{'your birth certificate' | localizator}}</li>
+          <li class="form-list-item">{{'your report card (for grades 2-8)' | localizator}}</li>
+          <li class="form-list-item">{{'your health certificate (form 26)' | localizator}}</li>
+          <li class="form-list-item">{{'your passport-size photographs' | localizator}}</li>
+        </ul>
+      </div>
+      <app-dnd-file-upload tabindex="17"
+                           (fileUploaded)="onUpload($event)"
+                           [title]="'Choose file'"
+                           [class.wide]="true"
+                           [dndTop]="'-40px'"
+                           [dndHeight]="'90px'"
+                           >
+      </app-dnd-file-upload>
+      <app-documents-list [files]="files"></app-documents-list>
+      <div class="form__controls">
+        <button tabindex="18" class="form__button form__button_prev" type="button" (click)="prevForm(gradeFormGroup)">{{'Prev' | localizator}}</button>
+        <button tabindex="19" class="form__button form__button_next" type="button" (click)="nextForm(parentFormGroup)">{{'Next' | localizator}}</button>
+      </div>
+    </form>
+  </div>
+  <div *ngSwitchCase="2">
+    <h3 class="form-title">{{'PARENT / GUARDIANS INFORMATION' | localizator}}</h3>
+    <div class="form__field-title">{{'Please, enter your personal information and proceed to the next step.' | localizator}}</div>
+    <div class="form__field-title"><span class="form__field-required"></span> {{'- Attention, fields marked with asterisks are mandatory.' | localizator}}</div>
+    <form (ngSubmit)="save()" [formGroup]="parentFormGroup" class="form">
+      <div *ngFor="let field of parentFormFields; let i = index;" class="form__field-container">
+        <app-text-field
+          *ngIf="(field.type === 'tel' || field.type === 'text' || field.type === 'email')"
+          [id]="i"
+          [field]="field"
+          [form]="parentFormGroup"
+        >
+        </app-text-field>
+        <app-text-group-field
+          *ngIf="field.type === 'text-group'"
+          [name]="field.name"
+          [fields]="field.fields"
+          [form]="parentFormGroup.controls[field.ctrlName]"
+          [id]="i"
+        >
+        </app-text-group-field>
+        <app-select-field
+          *ngIf="field.type === 'select'"
+          [id]="i"
+          [field]="field"
+          [form]="parentFormGroup"
+        >
+        </app-select-field>
+        <app-date-field
+          *ngIf="field.type === 'date'"
+          [id]="i"
+          [field]="field"
+          [form]="parentFormGroup"
+          [minDateLimit]=-80
+          [maxDateLimit]=-3
+        >
+        </app-date-field>
+        <app-radio-group-field
+          *ngIf="field.type === 'radio-group'"
+          [id]="i"
+          [name]="field.name"
+          [radios]="field.radios"
+          [form]="parentFormGroup"
+        >
+        </app-radio-group-field>
+      </div>
+      <input tabindex="16" id="secondParent" type="checkbox" [value]="isSecondParentShown"
+             (click)="addOneMoreParent($event)"/>
+      <label for="secondParent" class="form-title">{{"Add one more parent" | localizator}}</label>
+      <div *ngIf="!isSecondParentShown" class="form__controls">
+        <button tabindex="17" class="form__button form__button_prev" type="button" (click)="prevForm(applicantsFormGroup)">{{'Prev' | localizator}}</button>
+        <button tabindex="18" class="form__button form__button_next" type="button" (click)="submit()">{{'Submit' | localizator}}</button>
+      </div>
+    </form>
+    <form (ngSubmit)="save()" [formGroup]="parentFormGroup2" *ngIf="isSecondParentShown">
+      <h3 class="form-title">{{'PARENT / GUARDIANS INFORMATION' | localizator}}</h3>
+      <div class="form__field-title">{{'Please, enter your personal information and proceed to the next step.' | localizator}}</div>
+      <div class="form__field-title"><span class="form__field-required"></span> {{'- Attention, fields marked with asterisks are mandatory.' | localizator}}</div>
+      <div *ngFor="let field of parentFormFields; let i = index;" class="form__field-container">
+        <app-text-field
+          *ngIf="(field.type === 'tel' || field.type === 'text' || field.type === 'email')"
+          [id]="i+100"
+          [field]="field"
+          [form]="parentFormGroup2"
+        >
+        </app-text-field>
+        <app-text-group-field
+          *ngIf="field.type === 'text-group'"
+          [name]="field.name"
+          [fields]="field.fields"
+          [form]="parentFormGroup2.controls[field.ctrlName]"
+          [id]="i+100"
+        >
+        </app-text-group-field>
+        <app-select-field
+          *ngIf="field.type === 'select'"
+          [id]="i+100"
+          [field]="field"
+          [form]="parentFormGroup2"
+        >
+        </app-select-field>
+        <app-date-field
+          *ngIf="field.type === 'date'"
+          [id]="i+100"
+          [field]="field"
+          [form]="parentFormGroup2"
+          [minDateLimit]=-80
+          [maxDateLimit]=-3
+        >
+        </app-date-field>
+        <app-radio-group-field
+          *ngIf="field.type === 'radio-group'"
+          [id]="i+100"
+          [name]="field.name"
+          [radios]="field.radios"
+          [form]="parentFormGroup2"
+        >
+        </app-radio-group-field>
+      </div>
+      <div class="form__controls">
+        <button tabindex="109" class="form__button form__button_prev" type="button" (click)="prevForm(applicantsFormGroup)">{{'Prev' | localizator}}</button>
+        <button tabindex="110" class="form__button form__button_next" type="button" (click)="submit()">{{'Submit' | localizator}}</button>
+      </div>
+    </form>
+  </div>
+  <div *ngSwitchCase="3" class="form__response">
+    <div *ngIf="submitResponse === '409'" class="form__response-text">
+      {{"You are already sent form with information like this. If you want to change something, you can fill form again." | localizator}}
+    </div>
+    <div *ngIf="submitResponse === '200' || submitResponse === 'Form was successfully submitted'" class="form__response-text">
+      {{"Thank you! Yours information was successfully sent." | localizator}}
+    </div>
+    <div *ngIf="submitResponse !== '200' && submitResponse !== '409' && submitResponse !== 'Form was successfully submitted'" class="form__response-text">
+      {{"Sorry, something went wrong. Please, try again later." | localizator}}
+    </div>
+    <button class="form__button form__button_next" type="button" (click)="fillFormAgain()">{{"Fill form again" | localizator}}</button>
+  </div>
+</div>
+<app-spinner></app-spinner>

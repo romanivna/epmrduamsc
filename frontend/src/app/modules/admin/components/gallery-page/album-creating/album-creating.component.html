@@ -1,0 +1,67 @@
+<div [ngClass]="{'downloading' : !downloadFinished}"></div>
+<div class="content-box__prop-container">
+  <h2 class="content-box__prop-name">{{ 'album name' | localizator }}</h2>
+  <input class="content-box__header" [placeholder]="'Enter the text' | localizator "
+         [(ngModel)]="albumName"
+  maxlength="80"
+  minlength="4">
+  <p class="required-star">
+  </p>
+</div>
+<p class="hidden"
+   [ngClass]="{'error error-required' : errName}">
+  {{ 'validationInvalidRequired' | localizator }}
+</p>
+
+<div class="img-wrapper ">
+    <div class="img-box__local-upload-wrapper input-for-albums">
+      <div class="content-box">
+        <p class="required-star"></p>
+        <p class="hidden"
+           [ngClass]="{'error' : errImg}">
+          {{ 'validationInvalidNoImagesInAlbum' | localizator }}
+        </p>
+        <app-dnd-file-upload class="input-for-albums__dnd"
+                             (fileUploaded)="addImage($event)"
+                             [title]="'Choose image'"
+                             [multiple]="true"
+                             [dndHeight]="'80px'"
+                             [dndTop]="'-30px'">
+        </app-dnd-file-upload>
+      </div>
+    </div>
+  </div>
+
+<div class="img-box__album-all">
+  <div class="img-box__album"
+       *ngFor="let image of album?.sources">
+    <img class="img-box__album-img" [src]="image?.link">
+    <!--<div></div>-->
+    <div class="album__tools">
+      <a  class="album__tools-btn"
+          (click)="deleteImage(image.id)"
+          title="{{'delete image' | localizator}}">
+        <i class="fa fa-times album__icon" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="album-buttons">
+  <button class="album__btn album__btn--save"
+          [disabled]="!downloadFinished"
+          (click)="suggestToSave()">
+    {{ 'Save' | localizator }}
+  </button>
+  <button class="album__btn album__btn--cancel"
+          [disabled]="!downloadFinished"
+          (click)="suggestToCancel()">
+    {{ 'Cancel' | localizator }}
+  </button>
+</div>
+<app-error-message *ngIf="errMessage" [message]="errMessage" (onEnding)="errMessage = null"></app-error-message>
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+<app-spinner></app-spinner>

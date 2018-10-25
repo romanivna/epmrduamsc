@@ -1,0 +1,53 @@
+<section class="albums" *ngIf="!noAlbums">
+  <a *ngFor="let album of albums; let index = index;"
+     (click)="onClick(album)"
+     [ngClass]="{ 'albums__album--medium-outside-left': !modalWindow && index % 2 === 0,
+                  'albums__album--medium-outside-right': !modalWindow && index % 2 === 1,
+                  'albums__album--large-outside-left': !modalWindow && index % 3 === 0,
+                  'albums__album--large-outside-right': !modalWindow && index % 3 === 2,
+                  'albums__album--large-inside': !modalWindow && index % 3 === 1,
+                  'albums__album--preview': modalWindow,
+                  'albums__album--active': album.id === activeAlbumId
+                }"
+     class="albums__album album">
+    <div class="album__image"
+    [ngStyle]="{'background-image': 'url(' + ( album.sources[0].link ) + ')'}">
+    </div>
+    <p class="album__caption">
+      <span class="album__title" [attr.title]="album.name">{{ album.name }} </span>
+    </p>
+    <div class="albums__tools" *ngIf="extended">
+      <a [routerLink]="['/admin/gallery', album.id]"
+         class="albums__tools-btn"
+         title="{{'edit album' | localizator}}">
+        <i class="fa fa-pencil albums__tools-icon" aria-hidden="true"></i>
+      </a>
+      <a  class="albums__tools-btn"
+          (click)="remove(album.id)"
+          title="{{'delete album' | localizator}}">
+        <i class="fa fa-times albums__tools-icon" aria-hidden="true"></i>
+      </a>
+    </div>
+  </a>
+
+
+
+  <app-show-next-button
+    [hideButton]="allAlbumsLoaded"
+    (showNext)="onNextAlbumsItemsClick()"
+    class="albums__arrow-btn">
+  </app-show-next-button>
+</section>
+
+<div class="btn" *ngIf="extended">
+  <a class="btn__add-album"
+     [routerLink]="['/', 'admin', 'gallery', 'album-creation']"
+     title="{{'add album' | localizator}}">
+    <i class="fa fa-plus btn__icon" aria-hidden="true"></i>
+  </a>
+</div>
+<p class="albums-no-one" *ngIf="noAlbums">{{ 'no albums' | localizator }}</p>
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+<app-spinner></app-spinner>

@@ -1,0 +1,41 @@
+@import '../../shared/styles/colors';
+
+.admission-rules {
+
+  margin-bottom: 10px;
+
+  &__section {
+    .admission-rules__header {
+      text-align: center;
+      letter-spacing: 1px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .admission-rules__requirements {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 40px;
+      font-weight: bold;
+
+      &-download {
+        color: $color-green;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &-pdf-preview {
+        max-width: 80px;
+      }
+    }
+
+    .admission-rules__content {
+      margin: 30px 0;
+      text-align: center;
+    }
+  }
+}

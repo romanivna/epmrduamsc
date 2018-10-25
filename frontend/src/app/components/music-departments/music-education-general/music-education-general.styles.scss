@@ -1,0 +1,16 @@
+.music-education-info {
+  margin: auto;
+  width: 85%;
+
+  & p {
+    margin: 15px;
+    text-align: justify;
+    font-size: 1.3rem;
+
+    &:first-letter {
+      margin-left: 50px;
+      font-size: 1.4rem;
+    }
+  }
+
+}

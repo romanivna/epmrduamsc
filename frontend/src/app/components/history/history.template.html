@@ -1,0 +1,30 @@
+<app-title [title]="'history'"></app-title>
+<div class="history-page">
+  <div class="history-page__title">
+    <div class="history-page__title-pic"
+      [ngStyle]="{'background-image': 'url(' + (contentMain.img.link) + ')'}">
+
+    </div>
+    <h5 class="history-page__title-text">
+      {{ contentMain.header }}
+    </h5>
+  </div>
+  <div class="history-page__chronology">
+
+    <div class="history-page__chronology-item" *ngFor="let item of content" >
+
+      <div *ngIf="item.img.link" class="history-page__chronology-side-image-container"
+           [ngStyle]="{'background-image': 'url(' + (item.img.link) + ')'}">
+      </div>
+
+      <div class="history-page__chronology-container">
+        <div class="history-page__chronology-description">
+          <h5 class="history-page__chronology-year"> {{ item.header }} </h5>
+          <p  class="history-page__chronology-text"> {{ item.content }} </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

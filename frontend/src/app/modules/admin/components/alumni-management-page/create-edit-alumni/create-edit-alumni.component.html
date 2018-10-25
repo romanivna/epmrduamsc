@@ -1,0 +1,192 @@
+<form [formGroup]="alumniForm" class="alumni">
+  <section class="alumni__wrapper">
+    <div class="img-wrapper">
+      <div class="teacher__img-box img-box">
+        <div class="img-wrapper__background-block">
+        </div>
+        <div class="img-box__img"
+             *ngIf="currentImg.img"
+             [ngStyle]="{'background-image': 'url(' + ( currentImg?.img.link ) + ')'}">
+        </div>
+        <a class="img-box__uploading"
+           (click)="showAlbums()">
+        <span class="img-box__uploading-text img-wrapper-icon">
+          <i class="fa fa-picture-o" aria-hidden="true">
+            <p class="img-box__uploading-text-title img-wrapper-icon-text">{{ 'AlbumTitle' | localizator }}</p>
+          </i>
+        </span>
+        </a>
+      </div>
+
+      <div class="img-box__local-upload-wrapper content-box">
+        <p class="asterisk"></p>
+        <app-dnd-file-upload class="img-box__local-upload img-wrapper-input"
+                             (fileUploaded)="addImage($event)"
+                             [title]="'Choose image'">
+        </app-dnd-file-upload>
+
+        <div *ngIf="savePressed" class="content-box__alert">
+          <p *ngIf="!currentImg.img && savePressed">
+            {{ 'validationInvalidRequired' | localizator}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="data-wrapper">
+      <div class="content-box">
+
+        <div class="content-box__prop-container">
+          <h2 class="content-box__prop-name">{{ 'grade year' | localizator }}</h2>
+          <label for="gradeYear" class="content-box__select-input-container content-box__alone">
+            <input class="content-box__header" id="gradeYear" formControlName="gradeYear">
+          </label>
+        </div>
+        <div class="content-box__alert">
+          <div *ngIf="(!alumniForm.get('gradeYear').valid)">
+            <p>{{ 'validationInvalid' | localizator}}</p>
+          </div>
+        </div>
+        <article class="alumni-item">
+          <h2 class="alumni-title"
+              [ngClass]="{'active-title': showLangIs === 'uk', 'error' : errorUk}">
+            {{'In Ukrainian' | localizator }}
+          </h2>
+          <div class="alumni-title-button"
+               (click)="showLang('uk')"
+               [ngClass]="{'arrow-rotate': showLangIs === 'uk'}">
+            <i class="fa fa-angle-down"></i>
+          </div>
+        </article>
+        <section class="content-box__lang"
+                 [ngClass]="{'active' : showLangIs === 'uk'}">
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'first name' | localizator }}</h2>
+            <label for="name_uk" class="content-box__select-input-container">
+              <input class="content-box__header" id="name_uk" formControlName="name_uk" [placeholder]="'Enter the text' | localizator ">
+            </label>
+            <p class="asterisk"></p>
+          </div>
+          <div *ngIf="alumniForm.status !== 'VALID'" class="content-box__alert">
+            <p *ngIf="!alumniForm.value.name_uk && savePressed">
+              {{ 'validationInvalidRequired' | localizator }}
+            </p>
+            <p *ngIf="alumniForm.value.name_uk.length < 2 && savePressed">
+              {{ 'validationInvalidLengthMin' | localizator }}
+            </p>
+          </div>
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'about alumnus' | localizator }}</h2>
+            <!--<ckeditor formControlName="about_uk" id="about_uk" [config]="ckEditorConfig"></ckeditor>-->
+            <textarea
+              formControlName="about_uk"
+              maxlength="2000"
+              class="content-box__about"
+              [placeholder]="'Enter the text' | localizator "></textarea>
+          </div>
+        </section>
+
+        <article class="alumni-item">
+          <h2 class="alumni-title"
+          [ngClass]="{'active-title': showLangIs === 'ru', 'error' : errorRu}">
+            {{'In Russian' | localizator }}
+            </h2>
+          <div class="alumni-title-button"
+               (click)="showLang('ru')"
+               [ngClass]="{'arrow-rotate': showLangIs === 'ru'}">
+            <i class="fa fa-angle-down"></i>
+          </div>
+        </article>
+        <section class="content-box__lang"
+                 [ngClass]="{'active' : showLangIs === 'ru'}">
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'first name' | localizator }}</h2>
+            <label for="name_ru" class="content-box__select-input-container">
+              <input class="content-box__header" id="name_ru" formControlName="name_ru" [placeholder]="'Enter the text' | localizator ">
+            </label>
+            <p class="asterisk"></p>
+          </div>
+          <div *ngIf="alumniForm.status !== 'VALID'" class="content-box__alert">
+            <p *ngIf="!alumniForm.value.name_ru && savePressed">
+              {{ 'validationInvalidRequired' | localizator }}
+            </p>
+            <p *ngIf="alumniForm.value.name_ru.length < 2 && savePressed">
+              {{ 'validationInvalidLengthMin' | localizator }}
+            </p>
+          </div>
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'about alumnus' | localizator }}</h2>
+            <!--<ckeditor formControlName="about_ru" id="about_ru" [config]="ckEditorConfig"></ckeditor>-->
+            <textarea
+              formControlName="about_ru"
+              maxlength="2000"
+              class="content-box__about"
+              [placeholder]="'Enter the text' | localizator "></textarea>
+          </div>
+        </section>
+
+          <article class="alumni-item">
+            <h2 class="alumni-title"
+                [ngClass]="{'active-title': showLangIs === 'en', 'error' : errorEn}">
+              {{'In English' | localizator }}
+            </h2>
+            <div class="alumni-title-button"
+                 (click)="showLang('en')"
+                 [ngClass]="{'arrow-rotate': showLangIs === 'en'}">
+              <i class="fa fa-angle-down"></i>
+            </div>
+            </article>
+        <section class="content-box__lang"
+        [ngClass]="{'active' : showLangIs === 'en'}">
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'first name' | localizator }}</h2>
+            <label for="name_en" class="content-box__select-input-container">
+              <input class="content-box__header" id="name_en" formControlName="name_en" [placeholder]="'Enter the text' | localizator ">
+            </label>
+            <p class="asterisk"></p>
+          </div>
+          <div *ngIf="alumniForm.status !== 'VALID'" class="content-box__alert">
+            <p *ngIf="!alumniForm.value.name_en && savePressed">
+              {{ 'validationInvalidRequired' | localizator }}
+            </p>
+            <p *ngIf="alumniForm.value.name_en.length < 2 && savePressed">
+              {{ 'validationInvalidLengthMin' | localizator }}
+            </p>
+          </div>
+          <div class="content-box__prop-container">
+            <h2 class="content-box__prop-name">{{ 'about alumnus' | localizator }}</h2>
+            <!--<ckeditor formControlName="about_en" [config]="ckEditorConfig"></ckeditor>-->
+            <textarea
+              formControlName="about_en"
+              maxlength="2000"
+              class="content-box__about"
+              [placeholder]="'Enter the text' | localizator "></textarea>
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+    </section>
+
+    <div class="alumni__tools">
+      <button class="alumni__btn alumni__btn--save"
+         (click)="suggestToSave()">
+        {{ 'Save' | localizator }}
+      </button>
+      <button class="alumni__btn alumni__btn--cancel"
+          (click)="suggestToCancel()">
+        {{ 'Cancel' | localizator }}
+      </button>
+    </div>
+  
+</form>
+
+<app-albums-modal-window *ngIf="photoSelection" (onAlbumChosen)="updateImg($event)"></app-albums-modal-window>
+
+<app-confirmation-modal-window [question]="questionForConfirmation"
+                               (onVoted)="decideAboutVoting($event)">
+</app-confirmation-modal-window>
+
+<app-spinner></app-spinner>

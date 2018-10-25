@@ -1,0 +1,41 @@
+<app-title [title]="'education'"></app-title>
+<section class="education">
+  <div  class="education__director">
+    <h2 class="education__title">School Director</h2>
+    <a class="education__director-link"
+       [routerLink]="schoolInfo?.director.link">{{ schoolInfo?.director.name }}</a>
+  </div>
+  <div class="education__divisions">
+    <article class="education__division education__division--musical">
+      <h2 class="education__title">Music Departments</h2>
+      <p class="education__head-name">
+        <span class="education__head-title"> Head Teacher: </span>
+        <a [routerLink]="musicalDivision?.headTeacher.link">{{ musicalDivision?.headTeacher.name }}</a>
+      </p>
+      <a [routerLink]="['/', 'music-education']" class="education__division-link">See more</a>
+    </article>
+    <article class="education__division education__division--elementary">
+      <h2 class="education__title">Elementary Education</h2>
+      <p class="education__head-name">
+        <span class="education__head-title"> Head Teacher: </span>
+        <a [routerLink]="elementaryDivision?.headTeacher.link">{{ elementaryDivision?.headTeacher.name }}</a>
+      </p>
+      <a [routerLink]="'./'" class="education__division-link">All Teachers</a>
+      <a [routerLink]="['/', 'elementary-education']" class="education__division-link">See more</a>
+    </article>
+  </div>
+</section>
+<section *ngIf="departments" class="departments">
+  <div *ngFor="let department of departments" class="departments__department">
+    <h2 class="departments__name">{{ department.name }}</h2>
+    <div class="departments__head">
+      <div class="departments__head-photo">
+        <img [src]="department.img.link" alt="{{ department }}" class="departments__photo">
+      </div>
+      <div class="departments__head-info">
+        <h3>{{ department.description }}</h3>
+      </div>
+    </div>
+  </div>
+</section>
+<app-spinner></app-spinner>

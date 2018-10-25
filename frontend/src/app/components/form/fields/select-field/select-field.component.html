@@ -1,0 +1,19 @@
+<div [formGroup]="form">
+  <label for="{{field?.ctrlName + '_' + id}}" class="form__field-title" ngClass="{{field?.required ? 'form__elem-required' : ''}}">{{field?.name | localizator}}</label>
+  <select #select
+          id="{{field?.ctrlName + '_' + id}}" size="1"
+          name="{{field?.ctrlName}}"
+          class="form__field"
+          required="{{field?.required}}"
+          formControlName="{{field?.ctrlName}}"
+          tabindex="{{1+id}}"
+  >
+    <option disabled>{{"Select option" | localizator}}</option>
+    <option *ngFor="let option of field?.options; let i = index" value="{{option?.name}}">{{option?.name | localizator}}</option>
+  </select>
+  <div class="form__field-error" *ngIf="(form.get(field.ctrlName).touched || form.get(field.ctrlName).dirty) && form.get(field.ctrlName).errors">
+    <div class="form__field-error-text" *ngIf="form.get(field.ctrlName).errors.required">
+      {{"This field is required. You need to select an option from the list." | localizator}}
+    </div>
+  </div>
+</div>

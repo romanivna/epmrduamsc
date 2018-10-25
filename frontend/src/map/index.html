@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body{
+      width: 100%;
+      height: 400px;
+      margin: 0;
+    }
+    #map{
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+  <script language="JavaScript" type="text/javascript">
+      var ru = false;
+      function getGmapsApiKey() {
+        var gMapsApiSrc = 'https://maps.googleapis.com/maps/api/js';
+        if(window.location.search.indexOf('ru')!=-1){
+          ru = true;
+        };
+        gMapsApiSrc += window.location.search;
+        gMapsApiSrc += '&libraries=places&callback=initMap';
+        var scr = document.createElement('script');
+        scr.src = gMapsApiSrc;
+        document.body.appendChild(scr);
+      }
+      function initMap() {
+        var school = {lat: 50.4651435, lng: 30.435882};
+        var placeId = 'ChIJRdh2jUrM1EAR4CHC--Rmn4M';
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 17,
+          center: school
+        });
+        var infoWindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+
+        service.getDetails({
+          placeId: placeId
+        }, function(place, status) {
+          if(ru){
+            place.name = 'КССМШ-интернат имени М. В. Лисенка';
+            place.formatted_address = 'Ул. Парково-Сырецкая 4, Киев, 02000';
+
+          };
+          if (status === 'OK') {
+            infoWindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+              '<br>' +
+              place.formatted_address + '</div>'+
+              '<a href='+ place.url +' target="blank">'+'Google Maps' + '</a>'
+            );
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location
+            });
+            infoWindow.open(map, marker);
+          }
+        });
+      }
+      window.onload = getGmapsApiKey;
+  </script>
+</head>
+<body>
+  <div id="map"></div>
+</body>
+</html>

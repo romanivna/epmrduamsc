@@ -1,0 +1,14 @@
+{
+  "/api/v1": {
+    "target": "http://ecsc00a01491.epam.com:3005",
+    "secure": false
+  },
+  "/api": {
+    "target": "http://ecsc00a01491.epam.com:3005",
+    "secure": false
+  },
+  "/applications": {
+    "target": "http://ecsc00a01491.epam.com:3005",
+    "secure": false
+  }
+}

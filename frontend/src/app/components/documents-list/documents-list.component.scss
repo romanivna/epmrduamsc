@@ -1,0 +1,33 @@
+@import '../../shared/styles/colors';
+
+.docs {
+  &__item {
+    display: flex;
+    padding: .5rem 0;
+    width: 50%;
+    min-width: 300px;
+  }
+
+
+  &__icon {
+    width: 30px;
+  }
+
+
+  &__name {
+    width: 100%;
+    overflow: hidden;
+  }
+
+
+  &__remove {
+    width: 20px;
+
+
+    &-link {
+      &:hover {
+        color: $color-red;
+      }
+    }
+  }
+}

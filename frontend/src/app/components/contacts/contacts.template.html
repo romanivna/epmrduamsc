@@ -1,0 +1,52 @@
+<app-title [title]="'contacts'"></app-title>
+<div class="contacts">
+  <section class="contacts__section">
+    <article class="contacts__item">
+      <h2 class="contacts__title">{{'Lysenko Music School' | localizator}}</h2>
+      <div class="contacts__contact">
+        <span class="contacts__contact-name">{{'address' | localizator}}:</span>
+        <p class="contacts__contact-value">{{ (contacts | async)?.address | localizatorFromObject }}</p>
+      </div>
+      <div class="contacts__contact">
+        <span class="contacts__contact-name">{{'phones' | localizator}}:</span>
+        <p class="contacts__contact-value">
+          <span *ngFor="let phone of (contacts | async)?.phones"
+             class="contacts__contact-phone">{{ phone }}</span>
+        </p>
+      </div>
+      <div class="contacts__contact">
+        <span class="contacts__contact-name">{{'faxes' | localizator}}:</span>
+        <p class="contacts__contact-value">
+          <span *ngFor="let fax of (contacts | async)?.faxes"
+             class="contacts__contact-phone">{{ fax }}</span>
+        </p>
+      </div>
+      <div class="contacts__contact">
+        <span class="contacts__contact-name">{{'Email' | localizator}}:</span>
+        <p class="contacts__contact-value">
+          <a href="mailto:{{ (contacts | async)?.email }}">{{ (contacts | async)?.email }}</a>
+        </p>
+      </div>
+    </article>
+    <article class="contacts__item">
+      <h2 class="contacts__title">{{'Opening hours' | localizator}}</h2>
+      <div *ngFor="let openingHour of (contacts | async)?.openingHours" class="contacts__contact">
+        <span class="contacts__contact-name">{{ openingHour.day | localizator }}:</span>
+        <p class="contacts__contact-value">{{ openingHour.hours }}</p>
+      </div>
+    </article>
+  </section>
+  <section class="contacts__section map">
+    <iframe [src]="mapsUrlParameters"
+            class="map__frame"
+            width="600"
+            height="450"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen>
+    </iframe>
+  </section>
+</div>
+
+
+<app-spinner></app-spinner>

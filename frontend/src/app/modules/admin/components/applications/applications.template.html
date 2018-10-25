@@ -1,0 +1,265 @@
+<div class="applications">
+  <h3 class="applications__header">
+    {{'applications' | localizator}}
+  </h3>
+  <div class="applications__tools">
+    <button class="applications__tools-button applications-download" (click)="saveAllApplications(applications)"> {{ 'download chosen applications' | localizator }} </button>
+    <button class="applications__tools-button" type="button"
+    (click)="showFilters = !showFilters">
+      {{'show filters' | localizator}}
+    </button>
+  </div>
+  <div class="applications__filters" *ngIf="showFilters">
+
+    <label for="filters-search" class="applications__input-container">
+      <input class="applications__filters-search" type="text"
+      [placeholder]="'Please enter search name' | localizator"
+      [(ngModel)]="searchName"
+      (input)="search()"
+      id="filters-search">
+    </label>
+<!-- filter by departments -->
+    <div class="more">
+      <p class="more-name" *ngIf="!currentDepartment"> {{ 'All departments'  | localizator }}</p>
+      <p class="more-name" *ngIf="currentDepartment"> {{ currentDepartment.name  | localizator }}</p>
+      <div class="more-button"
+           (click)="showMore('departmentsShow')"
+           [ngClass]="{'arrow-rotate': departmentsShow}">
+        <i class="fa fa-angle-down"></i>
+      </div>
+
+      <div class="more-list"
+          [ngClass]="{'more-list__hide' : !departmentsShow}">
+
+        <ul class="more-list__select" *ngIf="departmentsShow">
+          <li class="more-list__select-option"
+              (click)="filterByDepartment()">
+            {{'All departments' | localizator}}
+          </li>
+          <li *ngFor="let department of departments" class="more-list__select-option"
+              (click)="filterByDepartment(department)">
+            {{ department.name | localizator }}
+          </li>
+        </ul>
+      </div>
+    </div>
+<!-- filter by months -->
+    <div class="more">
+      <p class="more-name" *ngIf="!currentMonth"> {{ 'All months' | localizator }}</p>
+      <p class="more-name" *ngIf="currentMonth"> {{ months[currentMonth - 1] | localizator }}</p>
+      <div class="more-button"
+          (click)="showMore('monthShow')"
+          [ngClass]="{'arrow-rotate': monthShow}">
+        <i class="fa fa-angle-down"></i>
+      </div>
+
+      <div class="more-list"
+          [ngClass]="{'more-list__hide' : !monthShow}">
+
+        <ul class="more-list__select" *ngIf="monthShow">
+          <li class="more-list__select-option"
+              (click)="filterByMonth()">
+            {{'All years' | localizator}}
+          </li>
+          <li *ngFor="let month of months, let i = index" class="more-list__select-option"
+              (click)="filterByMonth(i+1)">
+            {{ month | localizator }}
+          </li>
+        </ul>
+      </div>
+    </div>
+<!-- filter by years -->
+    <div class="more">
+        <p class="more-name" *ngIf="!currentYear"> {{ 'All years'  | localizator }}</p>
+        <p class="more-name" *ngIf="currentYear"> {{ currentYear  | localizator }}</p>
+        <div class="more-button"
+             *ngIf="years?.length > 0"
+             (click)="showMore('yearsShow')"
+             [ngClass]="{'arrow-rotate': yearsShow}">
+          <i class="fa fa-angle-down"></i>
+        </div>
+
+        <div class="more-list"
+            [ngClass]="{'more-list__hide' : !yearsShow}">
+
+          <ul class="more-list__select" *ngIf="yearsShow">
+            <li class="more-list__select-option"
+                (click)="filterByYear()">
+              {{'All years' | localizator}}
+            </li>
+            <li *ngFor="let year of years" class="more-list__select-option"
+                (click)="filterByYear(year)">
+              {{ year | localizator }}
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  <div class="applications-table-wrapper">
+    <table class="applications-table">
+      <thead class="applications-table-header">
+        <tr class="applications-table-row">
+          <th class="applications-table-header__item">
+              <span> {{'Full name' | localizator}} </span>
+              <i class="fa fa-arrows-v applications-table-header__item-icon"
+              (click)="sort('name')"></i>
+          </th>
+          <th class="applications-table-header__item">
+              <span> {{'Grade' | localizator}} </span>
+              <i class="fa fa-arrows-v applications-table-header__item-icon"
+                (click)="sort('grade')"></i>
+          </th>
+          <th class="applications-table-header__item">
+              <span> {{'Department' | localizator}} </span>
+            <!--<i class="fa fa-arrows-v applications-table-header__item-icon"></i>-->
+          </th>
+          <th class="applications-table-header__item">
+              <span> {{'Date' | localizator}} </span>
+              <i class="fa fa-arrows-v applications-table-header__item-icon"
+                (click)="sortByDate()"></i>
+          </th>
+          <th class="applications-table-header__item" colspan="3">
+              <span> {{'Action' | localizator}} </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of applications">
+        <tr class="applications-table-row" *ngIf="!item.filters?.hide && !item.deleted">
+          <td class="applications-table-row__chunk">{{item.name}}</td>
+          <td class="applications-table-row__chunk">{{item.grade}}</td>
+          <td class="applications-table-row__chunk">{{item.student.department.name}}</td>
+          <td class="applications-table-row__chunk">{{months[item.filters.month - 1] | localizator}} {{ item.filters.year}}</td>
+          <td class="applications-table-row__chunk">
+            <span class="action-icon" title="look more" (click)="showApplication(item)">
+              <i class="fa fa-eye"></i>
+            </span>
+          </td>
+          <td class="applications-table-row__chunk">
+            <span class="action-icon" title="download" (click)="downloadApplication(item)">
+              <i class="fa fa-download"></i>
+            </span>
+          </td>
+          <td class="applications-table-row__chunk">
+            <span class="action-icon" title="delete application" (click)="trashApplication(item)">
+              <i class="fa fa-trash-o"></i>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+      <app-spinner></app-spinner>
+    </table>
+
+  </div>
+
+
+<div class="applications-trash">
+  <div class="applications-trash-wrapper">
+      <i class="fa fa-trash-o applications-trash-wrapper__icon"
+      (click)="showTrash = !showTrash"></i>
+      <span class="applications-trash-wrapper-counter">{{trashCounter}}</span>
+  </div>
+
+  <div class="table-wrapper trash"
+       [ngClass]="{'trash-show' : showTrash}">
+    <table class="applications-table"  *ngIf="isItemsInTheTrash && showTrash; else noTrash">
+      <thead class="applications-table-header">
+      <tr class="applications-table-row">
+        <th class="applications-table-header__item">
+          <div class="applications-table-header__item-block">
+            <span> {{'Full name' | localizator}} </span>
+            <i class="fa fa-arrows-v applications-table-header__item-icon"
+               (click)="sort('name')"></i>
+          </div>
+        </th>
+        <th class="applications-table-header__item">
+          <div class="applications-table-header__item-block">
+            <span> {{'Grade' | localizator}} </span>
+            <i class="fa fa-arrows-v applications-table-header__item-icon"
+               (click)="sort('grade')"></i>
+          </div>
+        </th>
+        <th class="applications-table-header__item">
+          <div class="applications-table-header__item-block">
+            <span> {{'Department' | localizator}} </span>
+            <!--<i class="fa fa-arrows-v applications-table-header__item-icon"></i>-->
+          </div>
+        </th>
+        <th class="applications-table-header__item">
+          <div class="applications-table-header__item-block">
+            <span> {{'Date' | localizator}} </span>
+            <i class="fa fa-arrows-v applications-table-header__item-icon"
+               (click)="sort('date')"></i>
+          </div>
+        </th>
+        <th class="applications-table-header__item" colspan=3>
+          <div class="applications-table-header__item-block">
+            <span> {{'Action' | localizator}} </span>
+          </div>
+        </th>
+        <th class="applications-table-header__item" >
+          <div class="applications-table-header__item-block">
+            <span>
+              <input type="checkbox" name="checkAll" (change)="checkAll()" [checked]="isAllTrashItemsChecked">
+            </span>
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let item of applications">
+        <tr class="applications-table-row" *ngIf="item.deleted">
+          <td class="applications-table-row__chunk">{{item.name}}</td>
+          <td class="applications-table-row__chunk">{{item.grade}}</td>
+          <td class="applications-table-row__chunk">{{item.student.department.name}}</td>
+          <td class="applications-table-row__chunk">{{item.date}}</td>
+          <td class="applications-table-row__chunk">
+            <span class="action-icon" title="look more" (click)="showApplication(item)">
+              <i class="fa fa-eye"></i>
+            </span>
+          </td>
+          <td class="applications-table-row__chunk">
+            <span class="action-icon" title="delete application" (click)="trashApplication(item)">
+              <i class="fa fa-repeat"></i>
+            </span>
+          </td>
+          <td class="applications-table-row__chunk">
+            <span class="action-icon" title="delete application" (click)="deletePermanently([item])">
+              <i class="fa fa-times"></i>
+            </span>
+          </td>
+          <td class="applications-table-row__chunk">
+            <span class="action-input" title="delete some applications" >
+                <input type="checkbox" name="checkOne" (change)="checkItems(item)" [checked]="item.filters.checked ? 'checked' : false">
+            </span>
+          </td>
+        </tr>
+      </tbody>
+      <app-spinner></app-spinner>
+    </table>
+    <div class="trash-buttons">
+    <button class="applications__tools-button" (click)="deleteChosenItems()"> {{ 'delete chosen' | localizator }} </button>
+    <button class="applications__tools-button" (click)="restoreChosenItems()"> {{ 'restore chosen' | localizator }} </button>
+    </div>
+  </div>
+  <ng-template #noTrash>
+    <p class="trash-no">{{'There is no applications in the trash.' | localizator}}</p>
+  </ng-template>
+</div>
+</div>
+
+<app-error-message *ngIf="error" [timeout]="errorTimeout"
+                   [message]="error"
+                   (onEnding)="handleError($event)">
+</app-error-message>
+
+<app-show-next-button
+  [hideButton]="!canLoadMore"
+  (showNext)="loadMore()">
+</app-show-next-button>
+
+<app-confirmation-modal-window [showButton]="true" [question]="confirmQuestion"  (onVoted)="decideVoting($event)">
+</app-confirmation-modal-window>
+<app-spinner></app-spinner>
+
+<div class="modal-frame" *ngIf="showFrameModal">
+  <i class="fa fa-times modal-frame__btn" [@btnTransitions] aria-hidden="true" (click)="clearIframe()"></i>
+</div>

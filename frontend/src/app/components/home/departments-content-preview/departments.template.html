@@ -1,0 +1,19 @@
+<section class="departments">
+    <div class="departments__department"
+      [routerLink]="['/departments', department.id]"
+      *ngFor="let department of departments | async; let index = index;"
+    >
+      <div class="departments__department-img-wrapper">
+        <img class="departments__department-img"
+          src="{{ department.img.link }}"
+          alt="{{ department.name | localizator }}"
+        />
+      </div>
+      <p class="departments__department-caption">
+        <span class="departments__department-caption-name"
+        >
+          {{department.name | localizator}}
+        </span>
+      </p>
+    </div>
+</section>

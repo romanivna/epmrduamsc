@@ -1,0 +1,11 @@
+<div class="event-body">
+  <div *ngIf="content" class="event-body__description">
+    <div class="event-body__content" [innerHTML]="content | safeHtml"></div>
+  </div>
+</div>
+<app-modal-window *ngIf="selectedImg" (close)="selectedImg = null;">
+  <div class="img-modal"
+      [ngStyle]="{'background-image': 'url(' + selectedImg + ')'}"
+      [title]="title">
+  </div>
+</app-modal-window>

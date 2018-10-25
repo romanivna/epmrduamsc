@@ -1,0 +1,10 @@
+export { IAlumni, Alumni, Alumnies, EditedAlumni } from './alumni';
+export { ITeacher, Teacher, Teachers } from './teacher';
+export { IDepartment, Department, Departments } from './department';
+export { ICredentials, Credentials } from './credentials';
+export { ISocialLink, SocialLink, SocialLinks } from './social-link';
+export { IGeneralEducation, GeneralEducation, Education } from './general-education';
+export { Item, NamedItem, NewsItem } from './item';
+export { AdmissionRules } from './admission-rules';
+export { IEnsemble, Ensemble } from './ensemble';
+export { Document } from './document';

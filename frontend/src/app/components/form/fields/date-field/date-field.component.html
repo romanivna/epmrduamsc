@@ -1,0 +1,41 @@
+<div [formGroup]="form" *ngIf="changeLanguage">
+  <label class="form__field-title" for="{{field?.ctrlName + '_' + id}}"
+         ngClass="{{field?.required ? 'form__elem-required' : ''}}">
+    {{field?.name | localizator}}
+  </label>
+  <input #item
+         class="form__field"
+         id="{{field?.ctrlName + '_' + id}}"
+         name="{{field?.name}}"
+         type="text"
+         placeholder="{{field?.placeholder | localizator}}"
+         [dpDayPicker]="datePickerConfig"
+         theme = "dp-material"
+         mode = "day"
+         required="{{field?.required}}"
+         formControlName="{{field?.ctrlName}}"
+         ngClass="form__field-novalid : {{field?.ctrlName.invalid}}"
+         tabindex="{{id + 1}}"
+         maxlength="10"
+  />
+  <div class="form__field-error"
+       *ngIf="(form.get(field.ctrlName).touched || form.get(field.ctrlName).dirty) && form.get(field.ctrlName).errors">
+    <div class="form__field-error-text">
+      <div *ngIf="form.get(field.ctrlName).errors.required">
+        {{"This field is required. Please, enter your date of birth." | localizator}}
+      </div>
+      <div *ngIf="form.get(field.ctrlName).errors.format">
+        {{"Incorrect value. Format: DD.MM.YYYY ." | localizator}}
+      </div>
+      <div *ngIf="form.get(field.ctrlName).errors.pattern">
+        {{"Incorrect value. Format: DD.MM.YYYY ." | localizator}}
+      </div>
+      <div *ngIf="form.get(field.ctrlName).errors.invalidAgeForGrade1">
+        {{"Incorrect value. Children from 5 to 7 years old are allowed to attend 1 grade." | localizator}}
+      </div>
+      <div *ngIf="form.get(field.ctrlName).errors.invalidAgeForGrade29">
+        {{"Incorrect value. Children from 7 to 17 years old are allowed to attend 2-9 grade." | localizator}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div *ngIf="isLoggedIn()" class="user-state">
+  <a class="user-state__link" [routerLink]="'admin'" *ngIf="isAdminLoggedIn() || isCMLoggedIn()">
+    {{ role | localizator}}
+    <span class="header-misc__vertical-divisor"> | </span>
+  </a>
+  <a class="user-state__link"
+    [routerLink]="''"
+     (click)="logOut()">
+    {{'logOut' | localizator}}
+    <i class="fa fa-sign-out" aria-hidden="true"></i>
+  </a>
+  <a class="user-state__link"
+    [routerLink]="'login'"
+     *ngIf="!isLoggedIn()">
+    {{'logIn' | localizator}}
+  </a>
+</div>

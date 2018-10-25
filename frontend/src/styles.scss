@@ -1,0 +1,64 @@
+@import 'reset.css';
+@import 'assets/fonts/Oswald/stylesheet.css';
+@import 'assets/fonts/Scada/stylesheet.css';
+@import 'assets/fonts/Oswald-fixed/stylesheet.css';
+@import 'assets/fonts/Open-Sans-Condensed_bold/stylesheet.css';
+@import 'assets/fonts/OpenSansCondensed-Bold/styles.css';
+@import 'assets/fonts/OpenSans_regular/stylesheet.css';
+@import 'assets/style/picker.min.css';
+
+@import 'app/shared/styles/content/content';
+@import 'app/shared/styles/colors';
+@import 'app/shared/styles/variables';
+@import 'app/shared/styles/carousel';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+// sass-lint:disable  no-vendor-prefixes
+body {
+  min-width: 320px;
+  height: 100%;
+  font-family: 'Oswald light', Arial, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+// sass-lint:enable  no-vendor-prefixes
+
+a {
+  text-decoration: none;
+  color: $color-darkgray;
+  cursor: pointer;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+.slider {
+  outline: 1px solid $color-black;
+  height: 400px;
+}
+
+
+.line {
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    border: 0;
+    background-color: $color-lightgray-bg;
+    width: 70%;
+    height: 2px;
+  }
+}

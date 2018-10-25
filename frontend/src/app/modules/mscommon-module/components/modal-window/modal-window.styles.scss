@@ -1,0 +1,35 @@
+@import '../../../../shared/styles/colors';
+@import '../../../../shared/styles/z-index';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $zindex-modal;
+  background-color: $color-black-transparent-bg-hard;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+
+  &__content {
+    position: absolute;
+    top: 7%;
+    right: 7%;
+    bottom: 7%;
+    left: 7%;
+  }
+
+  &__close-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    color: $color-white;
+    font-size: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-red;
+    }
+  }
+}

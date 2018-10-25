@@ -1,0 +1,51 @@
+<div *ngIf="event" class="event-header">
+  <div class="event-header__img-wrapper event-header__item">
+    <img [src]="event.img.link"
+         [alt]="event.title"
+         class="event-header__img"
+         (click)="onImageClick($event)">
+  </div>
+  <div class="event-header__intro event-header__item"
+       [ngClass]="{ 'event-header__intro--full': !event.img }">
+    <h2 class="event-header__title"
+        [ngClass]="{ 'event-header__title--upcoming': !isPastEvent() }">
+      {{ event.title }}
+    </h2>
+    <p class="event-header__date">
+      <i class="fa fa-clock-o" aria-hidden="true"></i>
+
+      {{ event.date.start | date:"EEEE" | localizator}},
+      {{ event.date.start | date:"MMMM" | localizator}}
+      {{ event.date.start | date:"d" | localizator}},
+      {{ event.date.start | date:"yyyy" | localizator}}
+
+      <ng-container *ngIf="!isDatesInSameDay(event.date)">
+        -
+        {{ event.date.end | date:"EEEE" | localizator}},
+        {{ event.date.end | date:"MMMM" | localizator}}
+        {{ event.date.end | date:"d" | localizator}},
+        {{ event.date.end | date:"yyyy" | localizator}}.
+      </ng-container>
+
+      {{ event.time.from }} - {{ event.time.to }}
+    </p>
+    <a *ngIf="event.place?.link"
+        [href]="event.place.link"
+        target="_blank"
+        class="event-header__place-name event-header__place-name--link">
+      <i class="fa fa-map-marker event-header__place-link" aria-hidden="true"></i>
+      {{ event.place.name }}
+    </a>
+    <p *ngIf="event.place && !event.place.link"
+        class="event-header__place-name">
+        {{ event.place.name }}
+    </p>
+    <p *ngIf="event.place?.address" class="event-header__place-address">
+      {{ event.place.address }}
+    </p>
+  </div>
+  <app-event-body [event]="eventBody" class="event-body"></app-event-body>
+</div>
+<app-modal-window *ngIf="selectedImg" (close)="selectedImg = null;">
+  <img class="img-modal" [src]="selectedImg" [alt]="event.title">
+</app-modal-window>

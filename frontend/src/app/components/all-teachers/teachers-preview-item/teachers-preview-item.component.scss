@@ -1,0 +1,226 @@
+@import '../../../shared/styles/colors';
+
+.teacher-preview {
+  display: inline-block;
+  margin: 10px 9px;
+  border: $color-gray 4px solid;
+  padding: 20px;
+  width: calc(33% - 20px);
+  text-transform: uppercase;
+  font-weight: bold;
+
+  @media screen and (max-width: 768px) {
+    width: calc(50% - 20px);
+  }
+
+  @media screen and (max-width: 480px) {
+    width: calc(100% - 20px);
+  }
+
+  &--head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: $color-red 4px solid;
+    height: 300px;
+    cursor: pointer;
+
+    .teacher-preview-photo {
+      width: 60%;
+      height: 100%;
+    }
+
+    .teacher-preview-info {
+      min-width: 50%;
+      overflow: hidden;
+    }
+  }
+
+  &-photo {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+
+    &__img {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  &-info {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin-left: 10px;
+    height: 180px;
+    font-size: 1.5rem;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
+    &__name {
+      margin-top: 5px;
+      color: $color-red;
+      cursor: pointer;
+    }
+
+    &__position {
+      margin-top: 20px;
+      font-size: 1.3rem;
+    }
+
+    &__slogan {
+      position: absolute;
+      bottom: 0;
+      margin-top: 15px;
+      width: 100%;
+      text-align: right;
+      line-height: 1.25rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+:host-context(.department-preview) {
+  .teacher-preview--head {
+    margin: 0 0 -20px;
+    width: 100%;
+
+    .teacher-preview-photo {
+      max-width: 46%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .teacher-preview--head {
+      .teacher-preview-photo {
+        width: auto;
+        min-width: 200px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .teacher-preview {
+      flex-direction: column;
+      padding: 10px;
+      height: 450px;
+
+      &-photo {
+        min-width: 100%;
+      }
+
+      &-info {
+        flex-direction: column;
+
+        &__position {
+          margin-top: 10px;
+        }
+
+        &__slogan {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+:host-context(.all-teachers) {
+  .teacher-preview {
+    &--head {
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .teacher-preview {
+      flex-direction: column;
+      margin: 10px 0;
+      padding: 5px;
+      width: 100%;
+
+      &-photo {
+        margin: 0 auto;
+        background-position: top center;
+        width: 100%;
+      }
+
+      &-info__slogan {
+        padding: 5px 10px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) and (min-width: 480px) {
+    .teacher-preview {
+      &-photo {
+        height: 480px;
+      }
+
+      &-info {
+        height: 150px;
+      }
+
+      &--head {
+        height: auto;
+
+        &-photo {
+          height: 480px;
+        }
+
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    &-info {
+      height: 220px;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1200px) {
+    .teacher-preview {
+      width: calc(50% - 25px);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .teacher-preview {
+      padding: 10px;
+
+      &-info {
+        height: 180px;
+      }
+
+      &--head {
+        .teacher-preview-info {
+          height: 270px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .teacher-preview {
+      height: 400px;
+
+      &-photo {
+        height: 220px;
+      }
+
+      &-info {
+        height: 150px;
+      }
+    }
+  }
+
+}

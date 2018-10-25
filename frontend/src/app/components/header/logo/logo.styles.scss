@@ -1,0 +1,16 @@
+@import '../../../shared/styles/variables';
+@import '../../../shared/styles/colors';
+
+.header-misc {
+
+  &__man {
+    width: auto;
+    height: 5rem;
+  }
+
+  &__img {
+    width: auto;
+    max-width: calc(100% - 5rem - 5px);
+    height: 5rem;
+  }
+}
